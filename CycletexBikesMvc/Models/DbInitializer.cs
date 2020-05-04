@@ -58,8 +58,8 @@ namespace CycletexBikesMvc.Models
                 context.SaveChanges();
 
 
-                // Create Admin user.
-                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                // Assign Admin role to new Staff.
+                UserManager<Staff> userManager = new UserManager<Staff>(new UserStore<Staff>(context));
 
                 if (userManager.FindByName("admin@cycletex.com") == null)
                 {
@@ -72,7 +72,7 @@ namespace CycletexBikesMvc.Models
                         RequireUppercase = false
                     };
 
-                    var admin = new ApplicationUser()
+                    var admin = new Staff()
                     {
                         UserName = "admin@cycletex.com",
                         Email = "admin@cycletex.com",
