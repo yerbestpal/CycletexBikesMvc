@@ -62,6 +62,10 @@ namespace CycletexBikesMvc.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// RegistrationViewModel class.
+    /// Build the Register view.
+    /// </summary>
     public class RegisterViewModel
     {
         // Add Name property.
@@ -74,8 +78,9 @@ namespace CycletexBikesMvc.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        // Relax password length requirement in view model.
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]  // Default value is 6.
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -86,6 +91,10 @@ namespace CycletexBikesMvc.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// ResetPasswordViewModel class.
+    /// Build the ResetPassword view.
+    /// </summary>
     public class ResetPasswordViewModel
     {
         [Required]
@@ -93,8 +102,9 @@ namespace CycletexBikesMvc.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        // Relax password length requirement in view model.
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]  // Default value is 6.
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
