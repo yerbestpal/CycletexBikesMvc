@@ -64,6 +64,7 @@ namespace CycletexBikesMvc.Models
 
     public class RegisterViewModel
     {
+        // Add Name property.
         [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
