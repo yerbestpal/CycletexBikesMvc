@@ -156,8 +156,7 @@ namespace CycletexBikesMvc.Controllers
                 { 
                     UserName = model.Email, 
                     Email = model.Email,
-                    // Get users name.
-                    Name = model.Name
+                    Name = model.Name  // Get users name.
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

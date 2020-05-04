@@ -16,7 +16,7 @@ namespace CycletexBikesMvc.Models
         public string PostCode { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime JoinDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public Decimal Salary { get; set; }
 
         // TODO: Add navigation properties.

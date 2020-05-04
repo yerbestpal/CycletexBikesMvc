@@ -82,7 +82,7 @@ namespace CycletexBikesMvc.Models
                         PostCode = "ADMIN1",
                         DateOfBirth = new DateTime(1992, 12, 15),
                         JoinDate = DateTime.Now,
-                        EndDate = new DateTime(),
+                        //EndDate = new DateTime(),
                         Salary = 50000
                     };
 
@@ -112,7 +112,7 @@ namespace CycletexBikesMvc.Models
                         PostCode = "WRKSHP",
                         DateOfBirth = new DateTime(1982, 12, 15),
                         JoinDate = DateTime.Now,
-                        EndDate = new DateTime(),
+                        //EndDate = new DateTime(),
                         Salary = 30000
                     };
 
@@ -142,7 +142,7 @@ namespace CycletexBikesMvc.Models
                         PostCode = "ST0CK1",
                         DateOfBirth = new DateTime(1972, 12, 15),
                         JoinDate = DateTime.Now,
-                        EndDate = new DateTime(),
+                        //EndDate = new DateTime(),
                         Salary = 30000
                     };
 
@@ -172,7 +172,7 @@ namespace CycletexBikesMvc.Models
                         PostCode = "FL00R1",
                         DateOfBirth = new DateTime(1962, 12, 15),
                         JoinDate = DateTime.Now,
-                        EndDate = new DateTime(),
+                        //EndDate = new DateTime(),
                         Salary = 30000
                     };
 
@@ -202,7 +202,7 @@ namespace CycletexBikesMvc.Models
                         PostCode = "T3CHN0",
                         DateOfBirth = new DateTime(1922, 12, 15),
                         JoinDate = DateTime.Now,
-                        EndDate = new DateTime(),
+                        //EndDate = new DateTime(),
                         Salary = 12000
                     };
 
@@ -304,5 +304,6 @@ namespace CycletexBikesMvc.Models
                 }
             }
             context.SaveChanges();
+        }
     }
 }
