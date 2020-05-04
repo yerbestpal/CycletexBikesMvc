@@ -12,7 +12,7 @@ namespace CycletexBikesMvc.Models
     /// Main DbInitializer class.
     /// Seeds the various database tables with data for debugging.
     /// </summary>
-    public class DatabaseInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class DbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         /// <summary>
         /// Seeds the database
