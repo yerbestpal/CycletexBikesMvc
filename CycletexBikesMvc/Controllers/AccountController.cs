@@ -151,6 +151,7 @@ namespace CycletexBikesMvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Create new ApplicationUser.
                 var user = new ApplicationUser 
                 { 
                     UserName = model.Email, 
@@ -161,6 +162,9 @@ namespace CycletexBikesMvc.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Assign user to Customer role.
+                    await UserManager.AddToRoleAsync(user.Id, "Customer");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
