@@ -212,8 +212,97 @@ namespace CycletexBikesMvc.Models
                 context.SaveChanges();
 
                 //  Create new Customer.
-                //UserManager<Staff> customerManager = new UserManager<Staff>(new UserStore<Staff>(context));
+                UserManager<Customer> customerManager = new UserManager<Customer>(new UserStore<Customer>(context));
+
+                // Assign Customer role.
+                if (customerManager.FindByName("customer1@email.com") == null)
+                {
+                    customerManager.PasswordValidator = new PasswordValidator()
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 1,
+                        RequireLowercase = false,
+                        RequireNonLetterOrDigit = false,
+                        RequireUppercase = false
+                    };
+
+                    var customer1 = new Customer()
+                    {
+                        UserName = "customer@email.com",
+                        Email = "customer@email.com",
+                        Name = "Customer Carl"
+                    };
+
+                    customerManager.Create(customer1, "1");
+                    customerManager.AddToRole(customer1.Id, "Customer");
+                }
+
+                if (customerManager.FindByName("customer2@email.com") == null)
+                {
+                    customerManager.PasswordValidator = new PasswordValidator()
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 1,
+                        RequireLowercase = false,
+                        RequireNonLetterOrDigit = false,
+                        RequireUppercase = false
+                    };
+
+                    var customer2 = new Customer()
+                    {
+                        UserName = "customer2@email.com",
+                        Email = "customer2@email.com",
+                        Name = "Customer Kate"
+                    };
+
+                    customerManager.Create(customer2, "1");
+                    customerManager.AddToRole(customer2.Id, "Customer");
+                }
+
+                if (customerManager.FindByName("customer3@email.com") == null)
+                {
+                    customerManager.PasswordValidator = new PasswordValidator()
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 1,
+                        RequireLowercase = false,
+                        RequireNonLetterOrDigit = false,
+                        RequireUppercase = false
+                    };
+
+                    var customer3 = new Customer()
+                    {
+                        UserName = "customer3@email.com",
+                        Email = "customer3@email.com",
+                        Name = "Customer Kate"
+                    };
+
+                    customerManager.Create(customer3, "1");
+                    customerManager.AddToRole(customer3.Id, "Customer");
+                }
+
+                if (customerManager.FindByName("customer4@email.com") == null)
+                {
+                    customerManager.PasswordValidator = new PasswordValidator()
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 1,
+                        RequireLowercase = false,
+                        RequireNonLetterOrDigit = false,
+                        RequireUppercase = false
+                    };
+
+                    var customer4 = new Customer()
+                    {
+                        UserName = "customer4@email.com",
+                        Email = "customer4@email.com",
+                        Name = "Customer Kate"
+                    };
+
+                    customerManager.Create(customer4, "1");
+                    customerManager.AddToRole(customer4.Id, "Customer");
+                }
             }
-        }
+            context.SaveChanges();
     }
 }
