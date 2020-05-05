@@ -25,12 +25,46 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
+    @*<nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-            <a class="navbar-brand" href="#">CycleTex</a>
+            @Html.ActionLink("CycleTex", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Services", "Index", "Service", new { area = "" }, new { @class = "navbar-link nav-text" })
+            @Html.ActionLink("Create a Booking", "Index", "Booking", new { area = "" }, new { @class = "navbar-link nav-text" })
+
             <a class="btn btn-primary" href="#">Sign In</a>
+            <span class="btn btn-primary">
+                @Html.Partial("_loginPartial")
+            </span>
+
+        </div>
+    </nav>*@
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                @Html.ActionLink("CycleTex", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Services", "Index", "Service", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Create a Booking", "Index", "Booking", new { @class = "nav-link" })
+                    </li>
+
+                    <!-- Login/register buttons -->
+                    @Html.Partial("_loginPartial")
+                </ul>
+            </div>
         </div>
     </nav>
+
+
 
     <!--Render Page Content-->
     @RenderBody()
