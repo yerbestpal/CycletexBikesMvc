@@ -5,16 +5,13 @@ using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
-    public class PaymentType
-    {
-        public PaymentTypes Type { get; set; }
-    }
-
+    /// <summary>
+    /// PaymentTypes enumeration.
+    /// Contains list of different possible payment types.
+    /// </summary>
     public enum PaymentTypes
     {
         DebitCard,
         PayPal
     }
-
-    // Insert nav properties.
 }

@@ -19,6 +19,8 @@ namespace CycletexBikesMvc.Models
         public DateTime? EndDate { get; set; }
         public Decimal Salary { get; set; }
 
-        // TODO: Add navigation properties.
+        // Navigational Properties.
+
+        public List<Order> Orders { get; set; }
     }
 }
