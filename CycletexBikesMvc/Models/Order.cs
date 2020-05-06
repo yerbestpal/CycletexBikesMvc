@@ -32,7 +32,7 @@ namespace CycletexBikesMvc.Models
         public Staff Staff { get; set; }
 
         [ForeignKey("Supplier")]
-        public string SupplierId { get; set; }
+        public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
 
         public List<OrderLine> OrderLines { get; set; }

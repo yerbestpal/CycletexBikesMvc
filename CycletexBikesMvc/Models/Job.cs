@@ -29,11 +29,11 @@ namespace CycletexBikesMvc.Models
         // Navigational Properties
 
         [ForeignKey("Booking")]
-        public string BookingId { get; set; }
+        public int BookingId { get; set; }
         public Booking Booking { get; set; }
 
         [ForeignKey("Bike")]
-        public string bikeId { get; set; }
+        public int bikeId { get; set; }
         public Bike Bike { get; set; }
 
         public List<JobParts> JobParts { get; set; }

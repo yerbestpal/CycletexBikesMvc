@@ -14,9 +14,10 @@ namespace CycletexBikesMvc.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         // Adding tables to database
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Staff> Staff { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<Staff> Staff { get; set; }
+        //public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Bike> Bikes { get; set; }
         public DbSet<Booking> Bookings { get; set; }

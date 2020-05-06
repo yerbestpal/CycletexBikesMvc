@@ -17,11 +17,11 @@ namespace CycletexBikesMvc.Models
         // Navigational Properties.
 
         [Key, ForeignKey("Order"), Column(Order = 0)]
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
         public Order Order { get; set; }
 
         [Key, ForeignKey("Part"), Column(Order = 1)]
-        public string PartId { get; set; }
+        public int PartId { get; set; }
         public Part Part { get; set; }
     }
 }

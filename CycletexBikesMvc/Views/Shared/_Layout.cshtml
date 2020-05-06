@@ -42,6 +42,12 @@
                         @Html.ActionLink("Create a Booking", "Index", "Booking", new { @class = "nav-link" })
                     </li>
 
+                    <!-- TODO: This link format could potentially stop nav links from navigating to /Home/Index each time. -->
+                    @*<li class="nav-item">
+                        <a onclick="location.href='@Url.Action("CreateAppointment", "TempUser")'" class="nav-link">Book Appoinment</a>
+                    </li>*@
+
+
                     <!-- Login/register buttons -->
                     @Html.Partial("_loginPartial")
                 </ul>

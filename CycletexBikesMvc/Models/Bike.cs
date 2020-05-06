@@ -24,8 +24,8 @@ namespace CycletexBikesMvc.Models
 
         // Navigational properties
 
-        [ForeignKey("Category")]
-        public int CustomerId { get; set; }
+        [ForeignKey("Customer")]
+        public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
         public List<Job> Jobs { get; set; }

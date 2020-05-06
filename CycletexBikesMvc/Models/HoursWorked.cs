@@ -14,11 +14,11 @@ namespace CycletexBikesMvc.Models
         // Navigational Properties
 
         [Key, ForeignKey("Job"), Column(Order = 0)]
-        public string JobId { get; set; }
+        public int? JobId { get; set; }
         public Job Job { get; set; }
 
         [Key, ForeignKey("Labour"), Column(Order = 1)]
-        public string LabourId { get; set; }
-        public Job Labour { get; set; }
+        public int LabourId { get; set; }
+        public Labour Labour { get; set; }
     }
 }
