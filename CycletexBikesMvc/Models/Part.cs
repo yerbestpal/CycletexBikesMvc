@@ -26,13 +26,13 @@ namespace CycletexBikesMvc.Models
         [Required]
         public Decimal Price { get; set; }
 
-        [Required]
+        [Required, Display(Name = "Re-Order Level")]
         public int ReOrderLevel { get; set; }
 
-        [Required]
+        [Required, Display(Name = "Re-Order Quantity")]
         public int ReOrderQuantity { get; set; }
 
-        [Required]
+        [Required, Display(Name = "Quantity On Hand")]
         public int QuantityOnHand { get; set; }
 
         // Navigational Properties.

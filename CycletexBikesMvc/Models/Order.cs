@@ -15,8 +15,14 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
+
+        [Display(Name = "Arrival Date")]
         public DateTime ArrivalDate { get; set; }
+
+        [Display(Name = "Has Arrived?")]
         public bool HasArrived { get; set; }
 
         // Navigational Properties

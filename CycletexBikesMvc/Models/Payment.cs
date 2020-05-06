@@ -15,12 +15,24 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
         public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
+
+        [Display(Name = "Payment Type")]
         public PaymentTypes PaymentType { get; set; }
         public string Status { get; set; }
+
+        [Display(Name = "Card Number")]
         public string CardNumber { get; set; }
+
+        [Display(Name = "Name On Card")]
         public string NameOnCard { get; set; }
+
+        [Display(Name = "Security Code")]
         public string SecurityCode { get; set; }
+
+        [Display(Name = "Expiry Date")]
         public DateTime ExpiryDate { get; set; }
     }
 }

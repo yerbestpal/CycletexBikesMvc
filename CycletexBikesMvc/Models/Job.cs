@@ -11,10 +11,18 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Fault Description")]
         public string FaultDescription { get; set; }
+
+        [Display(Name = "Repair Description")]
         public string RepairDescription { get; set; }
         public string Note { get; set; }
+
+        [Display(Name = "Start Time")]
         public DateTime StartTime { get; set; }
+
+        [Display(Name = "Completion Time")]
         public DateTime CompletionTime { get; set; }
         public Status Status { get; set; }
 

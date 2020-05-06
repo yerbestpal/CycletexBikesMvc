@@ -14,6 +14,8 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Contact Name")]
         public string ContactName { get; set; }
         public string Website { get; set; }
 

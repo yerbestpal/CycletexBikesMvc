@@ -15,6 +15,8 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Bike Type")]
         public BikeTypes BikeType { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
