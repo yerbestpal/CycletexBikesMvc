@@ -11,6 +11,7 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Payment
     {
+        public int Id { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public PaymentTypes PaymentType { get; set; }

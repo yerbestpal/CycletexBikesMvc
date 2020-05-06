@@ -12,6 +12,7 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Labour
     {
+        public int Id { get; set; }
         public Decimal Cost { get; set; }
         public BikeServices Service { get; set; }
 

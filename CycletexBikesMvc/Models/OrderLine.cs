@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -15,11 +16,11 @@ namespace CycletexBikesMvc.Models
     {
         // Navigational Properties.
 
-        [ForeignKey("Order")]
+        [Key, ForeignKey("Order"), Column(Order = 0)]
         public string OrderId { get; set; }
         public Order Order { get; set; }
 
-        [ForeignKey("Part")]
+        [Key, ForeignKey("Part"), Column(Order = 1)]
         public string PartId { get; set; }
         public Part Part { get; set; }
     }

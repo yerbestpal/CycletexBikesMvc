@@ -8,6 +8,7 @@ namespace CycletexBikesMvc.Models
 {
     public class Job
     {
+        public int Id { get; set; }
         public string FaultDescription { get; set; }
         public string RepairDescription { get; set; }
         public string Note { get; set; }

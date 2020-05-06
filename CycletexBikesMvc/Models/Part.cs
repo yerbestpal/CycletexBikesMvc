@@ -12,6 +12,8 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Part
     {
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DayPilot.Web.Mvc.Data;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -16,11 +18,11 @@ namespace CycletexBikesMvc.Models
 
         // Navigational Properties
 
-        [ForeignKey("Part")]
+        [Key, ForeignKey("Part"), Column(Order = 0)]
         public string PartId { get; set; }
         public Part Part { get; set; }
 
-        [ForeignKey("Job")]
+        [Key, ForeignKey("Job"), Column(Order = 1)]
         public string JobId { get; set; }
         public Job Job { get; set; }
     }

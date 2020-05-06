@@ -12,6 +12,7 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Order
     {
+        public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ArrivalDate { get; set; }
         public bool HasArrived { get; set; }

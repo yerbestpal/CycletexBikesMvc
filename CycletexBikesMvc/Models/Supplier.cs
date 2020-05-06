@@ -9,8 +9,9 @@ namespace CycletexBikesMvc.Models
     /// Supplier class.
     /// Suppliers fulfil Part Orders for CycleTex.
     /// </summary>
-    public class Supplier : ApplicationUser
+    public class Supplier
     {
+        public int Id { get; set; }
         public string ContactName { get; set; }
         public string Website { get; set; }
 
