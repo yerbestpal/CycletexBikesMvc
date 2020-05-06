@@ -19,10 +19,10 @@ namespace CycletexBikesMvc.Models
         public string RepairDescription { get; set; }
         public string Note { get; set; }
 
-        [Display(Name = "Start Time")]
+        [Display(Name = "Start Time"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime StartTime { get; set; }
 
-        [Display(Name = "Completion Time")]
+        [Display(Name = "Completion Time"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CompletionTime { get; set; }
         public Status Status { get; set; }
 

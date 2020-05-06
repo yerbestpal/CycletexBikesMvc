@@ -16,7 +16,7 @@ namespace CycletexBikesMvc.Models
         public int Id { get; set; }
         public decimal Amount { get; set; }
 
-        [Display(Name = "Payment Date")]
+        [Display(Name = "Payment Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime PaymentDate { get; set; }
 
         [Display(Name = "Payment Type")]

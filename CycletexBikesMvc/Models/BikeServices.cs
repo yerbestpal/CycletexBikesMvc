@@ -7,6 +7,11 @@ using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
+    /// <summary>
+    /// BikeServices enum.
+    /// Provides list of services that can be carried out on bikes.
+    /// Renamed from 'Services' because Services is a built in class.
+    /// </summary>
     public enum BikeServices
     {
         [Display(Name="Inner Tube Replacement")] InnerTubeReplacement,

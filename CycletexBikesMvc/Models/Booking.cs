@@ -17,16 +17,16 @@ namespace CycletexBikesMvc.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
 
-        [Display(Name = "Check-in Date")]
+        [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime CheckInDate { get; set; }
 
-        [Display(Name = "Check-out Date")]
+        [Display(Name = "Check-out Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime CheckOutDate { get; set; }
 
         [Display(Name = "Card Number")]
         public string CardNumber { get; set; }
 
-        [Display(Name = "Card Expiry Date")]
+        [Display(Name = "Card Expiry Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime CardExpiryDate { get; set; }
 
         [Display(Name = "3-Digit Security No.")]

@@ -16,13 +16,13 @@ namespace CycletexBikesMvc.Models
         public string Address { get; set; }
         public string PostCode { get; set; }
 
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "Date of Birth"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
-        [Display(Name = "Join Date")]
+        [Display(Name = "Join Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime JoinDate { get; set; }
 
-        [Display(Name = "End Date")]
+        [Display(Name = "End Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime? EndDate { get; set; }
         public Decimal Salary { get; set; }
 
