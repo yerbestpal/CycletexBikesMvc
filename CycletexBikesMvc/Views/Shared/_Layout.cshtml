@@ -36,10 +36,10 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item nav-link">
-                        @Html.ActionLink("Services", "Index", "Service", new { @class = "nav-link" })
+                        @Html.ActionLink("Services", "Index", "Service", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item nav-link">
-                        @Html.ActionLink("Create a Booking", "Index", "Booking", new { @class = "nav-link" })
+                        @Html.ActionLink("Create a Booking", "Create", "Booking", null, new { @class = "nav-link" })
                     </li>
 
                     <!-- TODO: This link format could potentially stop nav links from navigating to /Home/Index each time. -->
