@@ -10,7 +10,7 @@ namespace CycletexBikesMvc
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/DayPilot/daypilot-all.min.js"));
+                        "~/Scripts/daypilot-all.min.js"));  // Bundle DayPilot.
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
