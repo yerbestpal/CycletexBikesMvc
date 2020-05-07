@@ -14,6 +14,8 @@ namespace CycletexBikesMvc.Models
     {
         // No unique properties except for navigation properties.
 
+        // Navigational Properties
+
         public List<Bike> Bikes { get; set; }
         public List<Booking> Bookings { get; set; }
     }
