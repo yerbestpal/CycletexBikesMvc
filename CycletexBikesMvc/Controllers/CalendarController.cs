@@ -1,4 +1,5 @@
-﻿using DayPilot.Web.Mvc;
+﻿using CycletexBikesMvc.SQL;
+using DayPilot.Web.Mvc;
 using DayPilot.Web.Mvc.Enums;
 using DayPilot.Web.Mvc.Events.Calendar;
 using System;
@@ -22,9 +23,26 @@ namespace CycletexBikesMvc.Controllers
 
         class Dpc : DayPilotCalendar
         {
+            CalendarDataContext dc = new CalendarDataContext();
+
             protected override void OnInit (InitArgs e)
             {
                 UpdateWithMessage("Welcome!", CallBackUpdateType.Full);
+            }
+
+            protected override void OnFinish()
+            {
+                if (UpdateType == CallBackUpdateType.None) 
+                {
+                    return;
+                }
+
+                DataIdField = "Id";
+                DataStartField = "Start";
+                DataEndField = "End";
+                DataTextField = "Text";
+
+                Events = from e in dc.Bookings where (e.Date == VisibleStart) select e;
             }
         }
     }
