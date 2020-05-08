@@ -25,6 +25,20 @@ namespace CycletexBikesMvc
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // FullCalendar css files.
+            bundles.Add(new StyleBundle("~/Content/fullcalendarcss").Include(
+                        "~/Content/fullcalendar.min.css",
+                        "~/Content/fullcalendar.print.min.css",
+                        "~/Content/jquery-ui.css",
+                        "~/Content/jquery-ui.structure.css",
+                        "~/Content/jquery-ui.theme.css"));
+
+            // FullCalendar scripts.
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendarjs").Include(
+                      "~/Scripts/jquery-ui.js",
+                      "~/Scripts/moment-with-locales.min.js",
+                      "~/Scripts/fullcalendar.min.js"));
         }
     }
 }

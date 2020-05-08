@@ -20,6 +20,9 @@
 
     <!-- Custom styles for this template -->
     <link href="~/Content/Site.css" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("CSS", required: false)
 
 </head>
 
@@ -44,8 +47,8 @@
 
                     <!-- TODO: This link format could potentially stop nav links from navigating to /Home/Index each time. -->
                     @*<li class="nav-item">
-                        <a onclick="location.href='@Url.Action("CreateAppointment", "TempUser")'" class="nav-link">Book Appoinment</a>
-                    </li>*@
+                            <a onclick="location.href='@Url.Action("CreateAppointment", "TempUser")'" class="nav-link">Book Appoinment</a>
+                        </li>*@
 
 
                     <!-- Login/register buttons -->
@@ -116,7 +119,6 @@
     <script src="https://kit.fontawesome.com/19df47b718.js" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)
 </body>
-
 </html>
 
 
