@@ -33,7 +33,8 @@ namespace CycletexBikesMvc
 
             // Bundle BootstrapDatePicker scripts.
             bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
-              "~/Scripts/bootstrap-datepicker.min.js"));
+              "~/Scripts/bootstrap-datepicker.min.js",
+              "~/Scripts/locales/bootstrap-datepicker.en-GB.min.js"));
         }
     }
 }
