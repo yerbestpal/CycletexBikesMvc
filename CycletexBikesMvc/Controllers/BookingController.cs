@@ -10,53 +10,53 @@ namespace CycletexBikesMvc.Controllers
 {
     public class BookingController : Controller
     {
-        public ActionResult GetEvents(double start, double end)
-        {
-            var fromDate = ConvertFromUnixTimestamp(start);
-            var toDate = ConvertFromUnixTimestamp(end);
+        //public ActionResult GetEvents(double start, double end)
+        //{
+        //    var fromDate = ConvertFromUnixTimestamp(start);
+        //    var toDate = ConvertFromUnixTimestamp(end);
 
-            //Get the events
-            //You may get from the repository also
-            var eventList = GetEvents();
+        //    //Get the events
+        //    //You may get from the repository also
+        //    var eventList = GetEvents();
 
-            var rows = eventList.ToArray();
-            return Json(rows, JsonRequestBehavior.AllowGet);
-        }
+        //    var rows = eventList.ToArray();
+        //    return Json(rows, JsonRequestBehavior.AllowGet);
+        //}
 
-        private List<Event> GetEvents()
-        {
-            List<Event> eventList = new List<Event>();
+        //private List<Event> GetEvents()
+        //{
+        //    List<Event> eventList = new List<Event>();
 
-            Event newEvent = new Event
-            {
-                Id = "1",
-                Title = "Event 1",
-                Start = DateTime.Now.AddDays(1).ToString("s"),
-                End = DateTime.Now.AddDays(1).ToString("s"),
-                AllDay = false
-            };
+        //    Event newEvent = new Event
+        //    {
+        //        Id = "1",
+        //        Title = "Event 1",
+        //        Start = DateTime.Now.AddDays(1).ToString("s"),
+        //        End = DateTime.Now.AddDays(1).ToString("s"),
+        //        AllDay = false
+        //    };
 
-            eventList.Add(newEvent);
+        //    eventList.Add(newEvent);
 
-            newEvent = new Event
-            {
-                Id = "1",
-                Title = "Event 3",
-                Start = DateTime.Now.AddDays(2).ToString("s"),
-                End = DateTime.Now.AddDays(3).ToString("s"),
-                AllDay = false
-            };
+        //    newEvent = new Event
+        //    {
+        //        Id = "1",
+        //        Title = "Event 3",
+        //        Start = DateTime.Now.AddDays(2).ToString("s"),
+        //        End = DateTime.Now.AddDays(3).ToString("s"),
+        //        AllDay = false
+        //    };
 
-            eventList.Add(newEvent);
+        //    eventList.Add(newEvent);
 
-            return eventList;
-        }
+        //    return eventList;
+        //}
 
-        private static DateTime ConvertFromUnixTimestamp(double timestamp)
-        {
-            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return origin.AddSeconds(timestamp);
-        }
+        //private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        //{
+        //    var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        //    return origin.AddSeconds(timestamp);
+        //}
 
 
 

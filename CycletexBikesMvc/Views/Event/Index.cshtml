@@ -1,0 +1,36 @@
+﻿@model CycletexBikesMvc.Models.EventViewModel
+
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/fullcalendarcss")
+
+<div class="container">
+    <div id='calendar'>
+        @*FullCalendar is loaded here.*@
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/fullcalendarjs")
+
+    <script type="text/javascript">
+
+			$(document).ready(function () {
+				$('#calendar').fullCalendar({
+        			header: {
+            			left: 'prev,next today',
+            			center: 'title',
+            			right: 'month,agendaWeek,agendaDay'
+					},
+            		firstDay: 1, //The day that each week begins (Monday=1)
+            		slotMinutes: 60,
+            		events: '@Url.RouteUrl(new{ action="GetEvents", controller="Event"})'
+        		});
+    		});
+
+    </script>
+}

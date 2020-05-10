@@ -176,6 +176,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,6 +192,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DbInitializer.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\HoursWorked.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobParts.cs" />
@@ -490,10 +492,11 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Scripts\jquery\jquery.min.map" />
     <Content Include="Scripts\jquery\jquery.slim.min.map" />
-    <Content Include="Views\Booking\Create.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Booking\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
