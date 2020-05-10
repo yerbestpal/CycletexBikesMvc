@@ -25,6 +25,15 @@ namespace CycletexBikesMvc
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // Bundle BootstrapDatePicker styles.
+            bundles.Add(new StyleBundle("~/Content/datepickercss").Include(
+                    "~/Content/bootstrap-datepicker.min.css"
+                ));
+
+            // Bundle BootstrapDatePicker scripts.
+            bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
+              "~/Scripts/bootstrap-datepicker.min.js"));
         }
     }
 }
