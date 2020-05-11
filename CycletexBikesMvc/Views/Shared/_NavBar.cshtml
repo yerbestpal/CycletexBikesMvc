@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNet.Identity;
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -16,11 +17,11 @@
                 {
                     if (User.IsInRole("Customer"))
                     {
+                        // Passing in logged in users Id to validate in GET action. This way, only a logged in Customer can access the page
                         <li class="nav-item nav-link">
-                            @Html.ActionLink("Create a Booking", "Create", "Booking", null, new { @class = "nav-link" })
+                            @Html.ActionLink("Create a Booking", "Create", "Booking", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                         </li>
                     }
-
                 }
                 else
                 {

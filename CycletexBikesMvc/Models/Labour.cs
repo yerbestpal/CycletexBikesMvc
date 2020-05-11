@@ -16,7 +16,7 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
         public Decimal Cost { get; set; }
-        public BikeServiceNames Service { get; set; }
+        public BikeService BikeService { get; set; }
 
         // Navigation Properties
 

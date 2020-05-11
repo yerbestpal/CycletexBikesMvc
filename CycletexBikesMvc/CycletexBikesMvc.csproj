@@ -181,7 +181,6 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Bike.cs" />
-    <Compile Include="Models\BikeServiceNames.cs" />
     <Compile Include="Models\BikeTypes.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -380,6 +379,7 @@
     <Content Include="Scripts\jquery\jquery.slim.min.map" />
     <Content Include="Views\Booking\Create.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Shared\_MastHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

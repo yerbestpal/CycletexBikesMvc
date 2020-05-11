@@ -23,6 +23,7 @@ namespace CycletexBikesMvc.ViewModels
         public List<SelectListItem> DebitCards { get; set; }
         public int DebitCard { get; set; }
 
-        public List<BikeService> Services { get; set; }
+        public List<SelectListItem> BikeServices { get; set; }
+        public int BikeService { get; set; }
     }
 }

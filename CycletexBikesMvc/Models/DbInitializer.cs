@@ -368,41 +368,191 @@ namespace CycletexBikesMvc.Models
 
             context.SaveChanges();
 
-            // Seed Services.
-            #region SeedServices
-            /* Originally, I planned to use just enums for Bike Services, until I realised that Services
-               would require a price. I used the following code so the BikeServiceNames enum would not be
-               redundant however it would have been more efficient and less time consuming to just seed the
-               BikeService class without it.*/
-            var serviceNames = Enum.GetValues(typeof(BikeServiceNames)).Cast<BikeServiceNames>();
-            List<BikeService> services = new List<BikeService>();
-            foreach (var service in serviceNames)
+            // Create Services.
+            List<BikeService> services = new List<BikeService>
             {
-                services.Add(new BikeService()
+                new BikeService
                 {
-                    Name = service.ToString()
-                });
-            }
+                    Name = "Inner Tube Replacement",
+                    Cost = 10
+                },
+                new BikeService
+                {
+                    Name = "Hub Service",
+                    Cost = 15
+                },
+                new BikeService
+                {
+                    Name = "Wheel Truing (Subject to Assessment)",
+                    Cost = 10
+                },
+                new BikeService
+                {
+                    Name = "Wheel Assembly Front (Fitting tube and tyre)",
+                    Cost = 15
+                },
+                new BikeService
+                {
+                    Name = "Wheel Assembly Rear (Fitting tube, tyre and cassette)",
+                    Cost = 20
+                },
+                new BikeService
+                {
+                    Name = "Wheel Build",
+                    Cost = 30
+                },
+                new BikeService
+                {
+                    Name = "Freewheel or Cassette",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "Spoke Replacement (1-5 Spoke)",
+                    Cost = 18
+                },
+                new BikeService
+                {
+                    Name = "Slime Service",
+                    Cost = 6
+                },
+                new BikeService
+                {
+                    Name = "Standard Tubeless Setup (Regular Sealant)",
+                    Cost = 50
+                },
+                new BikeService
+                {
+                    Name = "Premium Tubeless Setup (Race Sealant)",
+                    Cost = 55
+                },
+                new BikeService
+                {
+                    Name = "Standard Tubeless Top Up",
+                    Cost = 10
+                },
+                new BikeService
+                {
+                    Name = "Premium Tubeless Top Up",
+                    Cost = 12
+                },
+                new BikeService
+                {
+                    Name = "Gear Service",
+                    Cost = 18
+                },
+                new BikeService
+                {
+                    Name = "Gear Shifter Replacement (Each)",
+                    Cost = 10
+                },
+                new BikeService
+                {
+                    Name = "Chain fitting",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "Drivetrain Clean",
+                    Cost = 20
+                },
+                new BikeService
+                {
+                    Name = "Bottom Bracket Repalcement/Service",
+                    Cost = 25
+                },
+                new BikeService
+                {
+                    Name = "Front/Rear Mech",
+                    Cost = 15
+                },
+                new BikeService
+                {
+                    Name = "Crank Replacement",
+                    Cost = 15
+                },
+                new BikeService
+                {
+                    Name = "Jocket Wheel Replacement (Excluding parts)",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "Mech Hanger Fit",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "L/H Crank Arm Replacement",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "Brake Service - Caliper/V Brakes (Both brakes)",
+                    Cost = 20
+                },
+                new BikeService
+                {
+                    Name = "Brake Lever Fit",
+                    Cost = 9
+                },
+                new BikeService
+                {
+                    Name = "Brake Fitting Hub & Frame Mount",
+                    Cost = 25
+                },
+                new BikeService
+                {
+                    Name = "Hydraulic Brake Bleed (Per Brake)",
+                    Cost = 20
+                },
+                new BikeService
+                {
+                    Name = "Brake Pads/Blocks (Pair)",
+                    Cost = 6
+                },
+                new BikeService
+                {
+                    Name = "Headset Replacement",
+                    Cost = 20
+                },
+                new BikeService
+                {
+                    Name = "Handlebar Grips Replacement",
+                    Cost = 5
+                },
+                new BikeService
+                {
+                    Name = "Handlebar Retaping - Road Bike",
+                    Cost = 10
+                },
+                new BikeService
+                {
+                    Name = "Stem Replacement",
+                    Cost = 8
+                },
+                new BikeService
+                {
+                    Name = "Comprehensive Fork Service",
+                    Cost = 75
+                },
+                new BikeService
+                {
+                    Name = "Lower Leg Service - Basic",
+                    Cost = 25
+                },
+                new BikeService
+                {
+                    Name = "Rear Can Service - Basic",
+                    Cost = 25
+                },
 
-            services[0].Cost = 10; services[1].Cost = 15; services[2].Cost = 10;
-            services[3].Cost = 15; services[4].Cost = 20; services[5].Cost = 30;
-            services[6].Cost = 8; services[7].Cost = 18; services[8].Cost = 6;
-            services[9].Cost = 50; services[10].Cost = 55; services[11].Cost = 10;
-            services[12].Cost = 12; services[13].Cost = 18; services[14].Cost = 10;
-            services[15].Cost = 8; services[16].Cost = 20; services[17].Cost = 25;
-            services[18].Cost = 15; services[19].Cost = 15; services[20].Cost = 8;
-            services[21].Cost = 8; services[22].Cost = 8; services[23].Cost = 20;
-            services[24].Cost = 6; services[25].Cost = 20; services[26].Cost = 5;
-            services[27].Cost = 10; services[28].Cost = 8; services[29].Cost = 75;
-            services[30].Cost = 25; services[31].Cost = 25;
+            };
 
-            foreach (BikeService service in services)
-            {
-                context.BikeServices.Add(service);
-            }
-
+            if (!context.BikeServices.Any())
+                context.BikeServices.AddRange(services);
+            
             context.SaveChanges();
-            #endregion
         }
     }
 }

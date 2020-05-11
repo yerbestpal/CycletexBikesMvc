@@ -35,8 +35,11 @@ namespace CycletexBikesMvc.Controllers
 
         // GET: Booking/Create
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
+            if (id == null)
+                return RedirectToAction("Login", "Account");
+
             if (ModelState.IsValid)
             {
                 try
@@ -70,12 +73,21 @@ namespace CycletexBikesMvc.Controllers
                         });
                     }
 
+                    List<SelectListItem> servicesSelectList = new List<SelectListItem>();
+                    foreach (BikeService service in services)
+                    {
+                        servicesSelectList.Add(new SelectListItem() { 
+                            Value = service.Id.ToString(),
+                            Text = service.Name
+                        });
+                    }
+
                     CreateBookingViewModel viewModel = new CreateBookingViewModel
                     {
                         Date = DateTime.Now.AddHours(2),  // Default value
                         Bikes = bikesSelectList,
                         DebitCards = cardsSelectList,
-                        Services = services
+                        BikeServices = servicesSelectList
                     };
 
                     return View(viewModel);
