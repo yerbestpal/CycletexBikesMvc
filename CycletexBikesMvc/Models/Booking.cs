@@ -16,7 +16,12 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
+        //[Required]
         public DateTime Date { get; set; }
+
+        //[Required]
+        public int BikeId { get; set; }
 
         [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime CheckInDate { get; set; }

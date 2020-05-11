@@ -104,27 +104,29 @@ namespace CycletexBikesMvc.Controllers
         // POST: Booking/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateBookingViewModel viewModel)
+        public ActionResult Create(CreateBookingViewModel viewModel)        
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // get bike by id from db
-
-                    // assign hard coded price to booking fee
-
+                    int BikeId = viewModel.Bike;
                     Booking Booking = new Booking()
                     {
                         Date = viewModel.Date,
                         CheckInDate = viewModel.Date.AddDays(2),
                         CheckOutDate = viewModel.Date.AddDays(3),
+                        Total = 30,
+                        BikeId = BikeId
                     };
 
+                    context.Bookings.Add(Booking);
+                    context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Console.WriteLine("Error: " + ex.Message);
                     return View();
                 }
             }

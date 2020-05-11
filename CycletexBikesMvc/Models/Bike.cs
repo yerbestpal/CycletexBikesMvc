@@ -27,9 +27,6 @@ namespace CycletexBikesMvc.Models
         [ForeignKey("Customer")]
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
-
-        public List<Booking> Bookings { get; set; }
-
         public List<Job> Jobs { get; set; }
     }
 }

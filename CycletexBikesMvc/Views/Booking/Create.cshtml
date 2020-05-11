@@ -4,8 +4,6 @@
     ViewBag.Title = "Create Booking";
 }
 
-
-
 <section class="">
     <div class="container">
         <h1 class="mb-5">Create Booking</h1>
@@ -29,7 +27,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Bike, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Bike, Model.Bikes, new { htmlAttributes = new { @class = "form-control", id = "BikeDropDown" } })
+                            @Html.DropDownListFor(model => model.Bike, Model.Bikes, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Bikes, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -37,7 +35,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DebitCard, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.DebitCard, Model.DebitCards, new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
+                            @Html.DropDownListFor(model => model.DebitCard, Model.DebitCards, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.DebitCards, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -45,7 +43,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.BikeService, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.BikeService, Model.BikeServices, new { htmlAttributes = new { @class = "form-control", id = "BikeServicesDropDown" } })
+                            @Html.DropDownListFor(model => model.BikeService, Model.BikeServices, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.BikeServices, "", new { @class = "text-danger" })
                         </div>
                     </div>

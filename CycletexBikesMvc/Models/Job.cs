@@ -25,7 +25,7 @@ namespace CycletexBikesMvc.Models
 
         [Display(Name = "Completion Time"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CompletionTime { get; set; }
-        public Status Status { get; set; }
+        public string Status { get; set; }
 
         // Navigational Properties
 
