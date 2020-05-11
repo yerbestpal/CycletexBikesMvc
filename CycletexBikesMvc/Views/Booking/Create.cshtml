@@ -1,51 +1,58 @@
 ﻿@model CycletexBikesMvc.ViewModels.CreateBookingViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Booking";
 }
 
-<h2>Create</h2>
+<section class="">
+    <div class="container">
+        <h2 class="text-center">Create Booking</h2>
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>CreateBookingViewModel</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bikes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Bikes, new SelectList(Model.Bikes, "", "Model"), new { htmlAttributes = new { @class = "form-control", id = "BikeDropDown" } })
+                        @Html.ValidationMessageFor(model => model.Bikes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DebitCards, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.DebitCards, new SelectList(Model.DebitCards, "", "CardNumber"), new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
+                        @Html.ValidationMessageFor(model => model.DebitCards, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Services, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Services, new SelectList(Model.Services, "", "Name"), new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
+                        @Html.ValidationMessageFor(model => model.Services, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Bikes, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Bikes, new SelectList(Model.Bikes, "", "Model"), new { htmlAttributes = new { @class = "form-control", id = "BikeDropDown" } })
-            @Html.ValidationMessageFor(model => model.Bikes, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DebitCards, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.DebitCards, new SelectList(Model.DebitCards, "", "CardNumber"), new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
-            @Html.ValidationMessageFor(model => model.DebitCards, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</section>

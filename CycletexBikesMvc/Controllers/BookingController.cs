@@ -40,12 +40,14 @@ namespace CycletexBikesMvc.Controllers
             string userId = User.Identity.GetUserId();
             List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == userId).ToList();
             List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
+            List<BikeService> services = context.BikeServices.ToList();
 
             CreateBookingViewModel viewModel = new CreateBookingViewModel
             {
                 Date = DateTime.Now.AddHours(2),  // Default value
                 Bikes = bikes,
-                DebitCards = cards
+                DebitCards = cards,
+                Services = services
             };
 
             return View(viewModel);

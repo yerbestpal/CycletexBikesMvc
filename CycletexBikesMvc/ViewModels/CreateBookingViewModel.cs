@@ -16,6 +16,6 @@ namespace CycletexBikesMvc.ViewModels
 
         public List<DebitCard> DebitCards { get; set; }
 
-
+        public List<BikeService> Services { get; set; }
     }
 }
