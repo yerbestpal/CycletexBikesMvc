@@ -21,10 +21,10 @@ namespace CycletexBikesMvc.Models
         /// <param name="context">Database instance</param>
         protected override void Seed(ApplicationDbContext context)
         {
-            // Seed DebitCards
+            // Create DebitCards
             List<DebitCard> cards = new List<DebitCard>
             {
-                new DebitCard { 
+                new DebitCard {
                     CardNumber = "1111111111111111",
                     CardExpiryDate = DateTime.Today.AddDays(365*2),
                     CardSecurityNo = 123
@@ -43,10 +43,10 @@ namespace CycletexBikesMvc.Models
                     CardNumber = "4444444444444444",
                     CardExpiryDate = DateTime.Today.AddDays(100),
                     CardSecurityNo = 123
-                },
+                }
             };
 
-            // Seed Bikes.
+            // Create Bikes
             List<Bike> bikes = new List<Bike>
             {
                 new Bike
@@ -86,48 +86,32 @@ namespace CycletexBikesMvc.Models
                 }
             };
 
+            // Seed Users
             if (!context.Users.Any())
             {
                 // Create roles.
+                #region CreateRoles
                 RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-                if (!roleManager.RoleExists("Admin"))
-                {
+                if (!roleManager.RoleExists("Admin")) 
                     roleManager.Create(new IdentityRole("Admin"));
-                }
-
-                if (!roleManager.RoleExists("Workshop Manager"))
-                {
+                if (!roleManager.RoleExists("Workshop Manager")) 
                     roleManager.Create(new IdentityRole("Workshop Manager"));
-                }
-
-                if (!roleManager.RoleExists("Stock Manager"))
-                {
+                if (!roleManager.RoleExists("Stock Manager")) 
                     roleManager.Create(new IdentityRole("Stock Manager"));
-                }
-
-                if (!roleManager.RoleExists("Floor Staff"))
-                {
+                if (!roleManager.RoleExists("Floor Staff")) 
                     roleManager.Create(new IdentityRole("Floor Staff"));
-                }
-
-                if (!roleManager.RoleExists("Technician"))
-                {
+                if (!roleManager.RoleExists("Technician")) 
                     roleManager.Create(new IdentityRole("Technician"));
-                }
-
-                if (!roleManager.RoleExists("Customer"))
-                {
+                if (!roleManager.RoleExists("Customer")) 
                     roleManager.Create(new IdentityRole("Customer"));
-                }
+                #endregion
 
                 context.SaveChanges();
 
-
-                //  Create new Staff.
+                //  Create new Staff
                 UserManager<Staff> staffManager = new UserManager<Staff>(new UserStore<Staff>(context));
 
-                // Assign Admin role.
+                // Assign Admin role
                 if (staffManager.FindByName("admin@cycletex.com") == null)
                 {
                     staffManager.PasswordValidator = new PasswordValidator()
@@ -374,15 +358,22 @@ namespace CycletexBikesMvc.Models
                 }
             }
 
-            // Add list of DebitCards to database
-            context.DebitCards.AddRange(cards);
+            // Seed CreditCards
+            if (!context.DebitCards.Any())
+                context.DebitCards.AddRange(cards);
 
-            // Add list of Bikes to database
-            context.Bikes.AddRange(bikes);
+            // Seed Bikes
+            if (!context.Bikes.Any())
+                context.Bikes.AddRange(bikes);
 
             context.SaveChanges();
 
             // Seed Services.
+            #region SeedServices
+            /* Originally, I planned to use just enums for Bike Services, until I realised that Services
+               would require a price. I used the following code so the BikeServiceNames enum would not be
+               redundant however it would have been more efficient and less time consuming to just seed the
+               BikeService class without it.*/
             var serviceNames = Enum.GetValues(typeof(BikeServiceNames)).Cast<BikeServiceNames>();
             List<BikeService> services = new List<BikeService>();
             foreach (var service in serviceNames)
@@ -411,6 +402,7 @@ namespace CycletexBikesMvc.Models
             }
 
             context.SaveChanges();
+            #endregion
         }
     }
 }
