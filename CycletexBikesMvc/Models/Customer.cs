@@ -16,5 +16,6 @@ namespace CycletexBikesMvc.Models
 
         public List<Bike> Bikes { get; set; }
         public List<Booking> Bookings { get; set; }
+        public List<DebitCard> DebitCards { get; set; }
     }
 }

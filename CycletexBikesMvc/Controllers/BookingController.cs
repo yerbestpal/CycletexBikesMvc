@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CycletexBikesMvc.Models;
+using CycletexBikesMvc.ViewModels;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +10,17 @@ using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
 {
+    /// <summary>
+    /// BookingController class.
+    /// Manages Booking functionality.
+    /// </summary>
     public class BookingController : Controller
     {
+        /// <summary>
+        /// Instance of the database.
+        /// </summary>
+        private readonly ApplicationDbContext context = new ApplicationDbContext();
+
         // GET: Booking
         public ActionResult Index()
         {
@@ -21,9 +34,21 @@ namespace CycletexBikesMvc.Controllers
         }
 
         // GET: Booking/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == userId).ToList();
+            List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
+
+            CreateBookingViewModel viewModel = new CreateBookingViewModel
+            {
+                Date = DateTime.Now.AddHours(2),  // Default value
+                Bikes = bikes,
+                DebitCards = cards
+            };
+
+            return View(viewModel);
         }
 
         // POST: Booking/Create

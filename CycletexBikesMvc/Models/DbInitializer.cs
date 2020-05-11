@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
@@ -20,6 +21,74 @@ namespace CycletexBikesMvc.Models
         /// <param name="context">Database instance</param>
         protected override void Seed(ApplicationDbContext context)
         {
+            // Seed DebitCards
+            List<DebitCard> cards = new List<DebitCard>
+            {
+                new DebitCard { 
+                    CardNumber = "1111111111111111",
+                    CardExpiryDate = DateTime.Today.AddDays(365*2),
+                    CardSecurityNo = 123
+                },
+                new DebitCard {
+                    CardNumber = "0000000000000000",
+                    CardExpiryDate = DateTime.Today.AddDays(365),
+                    CardSecurityNo = 123
+                },
+                new DebitCard {
+                    CardNumber = "3333333333333333",
+                    CardExpiryDate = DateTime.Today.AddDays(2),
+                    CardSecurityNo = 123
+                },
+                new DebitCard {
+                    CardNumber = "4444444444444444",
+                    CardExpiryDate = DateTime.Today.AddDays(100),
+                    CardSecurityNo = 123
+                },
+            };
+
+            // Seed Bikes.
+            List<Bike> bikes = new List<Bike>
+            {
+                new Bike
+                {
+                    BikeType = Enum.GetName(typeof(BikeTypes), 1),
+                    Brand = "SportX",
+                    Model = "Type 2",
+                    PurchaseDate = DateTime.Now.AddDays(-200)
+                },
+                new Bike
+                {
+                    BikeType = Enum.GetName(typeof(BikeTypes), 2),
+                    Brand = "MegaBikes",
+                    Model = "Ergo",
+                    PurchaseDate = DateTime.Now.AddDays(-10)
+                },
+                new Bike
+                {
+                    BikeType = Enum.GetName(typeof(BikeTypes), 3),
+                    Brand = "Eurotrail",
+                    Model = "Off-Road Pro",
+                    PurchaseDate = DateTime.Now.AddDays(-200)
+                },
+                new Bike
+                {
+                    BikeType = Enum.GetName(typeof(BikeTypes), 4),
+                    Brand = "Evans",
+                    Model = "Roadster",
+                    PurchaseDate = DateTime.Now
+                },
+                new Bike
+                {
+                    BikeType = Enum.GetName(typeof(BikeTypes), 5),
+                    Brand = "Acline",
+                    Model = "Global",
+                    PurchaseDate = DateTime.Now.AddDays(-150)
+                }
+            };
+
+
+            context.SaveChanges();
+
             if (!context.Users.Any())
             {
                 // Create roles.
@@ -228,9 +297,11 @@ namespace CycletexBikesMvc.Models
 
                     var customer1 = new Customer()
                     {
-                        UserName = "customer@email.com",
-                        Email = "customer@email.com",
-                        Name = "Customer Carl"
+                        UserName = "custome1r@email.com",
+                        Email = "customer1@email.com",
+                        Name = "Customer Carl",
+                        Bikes = bikes,
+                        DebitCards = cards.GetRange(0, 2)
                     };
 
                     customerManager.Create(customer1, "1");
@@ -252,7 +323,9 @@ namespace CycletexBikesMvc.Models
                     {
                         UserName = "customer2@email.com",
                         Email = "customer2@email.com",
-                        Name = "Customer Kate"
+                        Name = "Customer Carl",
+                        Bikes = bikes.GetRange(0, 3),
+                        DebitCards = cards.GetRange(1, 2)
                     };
 
                     customerManager.Create(customer2, "1");
@@ -303,6 +376,43 @@ namespace CycletexBikesMvc.Models
                     customerManager.AddToRole(customer4.Id, "Customer");
                 }
             }
+
+            // Add list of DebitCards to database
+            context.DebitCards.AddRange(cards);
+
+            // Add list of Bikes to database
+            context.Bikes.AddRange(bikes);
+
+            context.SaveChanges();
+
+            // Seed Services.
+            var serviceNames = Enum.GetValues(typeof(BikeServiceNames)).Cast<BikeServiceNames>();
+            List<BikeService> services = new List<BikeService>();
+            foreach (var service in serviceNames)
+            {
+                services.Add(new BikeService()
+                {
+                    Name = service.ToString()
+                });
+            }
+
+            services[0].Cost = 10; services[1].Cost = 15; services[2].Cost = 10;
+            services[3].Cost = 15; services[4].Cost = 20; services[5].Cost = 30;
+            services[6].Cost = 8; services[7].Cost = 18; services[8].Cost = 6;
+            services[9].Cost = 50; services[10].Cost = 55; services[11].Cost = 10;
+            services[12].Cost = 12; services[13].Cost = 18; services[14].Cost = 10;
+            services[15].Cost = 8; services[16].Cost = 20; services[17].Cost = 25;
+            services[18].Cost = 15; services[19].Cost = 15; services[20].Cost = 8;
+            services[21].Cost = 8; services[22].Cost = 8; services[23].Cost = 20;
+            services[24].Cost = 6; services[25].Cost = 20; services[26].Cost = 5;
+            services[27].Cost = 10; services[28].Cost = 8; services[29].Cost = 75;
+            services[30].Cost = 25; services[31].Cost = 25;
+
+            foreach (BikeService service in services)
+            {
+                context.BikeServices.Add(service);
+            }
+
             context.SaveChanges();
         }
     }

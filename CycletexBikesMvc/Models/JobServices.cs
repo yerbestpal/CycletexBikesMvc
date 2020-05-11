@@ -7,19 +7,11 @@ using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
-    /// <summary>
-    /// JobParts class.
-    /// Many to Many bridge class between Part and Job classes.
-    /// </summary>
-    public class JobParts
+    public class JobServices
     {
-        public int Quantity { get; set; }
-
-        // Navigational Properties
-
-        [Key, ForeignKey("Part"), Column(Order = 0)]
-        public int PartId { get; set; }
-        public Part Part { get; set; }
+        [Key, ForeignKey("BikeService"), Column(Order = 0)]
+        public int BikeServiceId { get; set; }
+        public BikeService BikeService { get; set; }
 
         [Key, ForeignKey("Job"), Column(Order = 1)]
         public int JobId { get; set; }

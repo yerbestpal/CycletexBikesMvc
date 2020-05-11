@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
@@ -36,7 +37,8 @@ namespace CycletexBikesMvc.Models
         public int bikeId { get; set; }
         public Bike Bike { get; set; }
 
-        public List<JobParts> JobParts { get; set; }
+        public List<JobParts> JobParts { get; set; }  // Many to many
         public List<HoursWorked> HoursWorked { get; set; }
+        public List<JobServices> JobServices { get; set; }  // Many to many
     }
 }

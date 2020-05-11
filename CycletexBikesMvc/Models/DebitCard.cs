@@ -8,31 +8,28 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Bike class.
-    /// Represents Customers bikes used for bookings.
+    /// DebitCard class.
+    /// Facilitates payment of bookings when required.
     /// </summary>
-    public class Bike
+    public class DebitCard
     {
-        private int myProperty;
-        private string name;
-
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Bike Type")]
-        public string BikeType { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        [Display(Name = "Card Number")]
+        public string CardNumber { get; set; }
 
-        // Navigational properties
+        [Display(Name = "Card Expiry Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        public DateTime CardExpiryDate { get; set; }
 
+        [Display(Name = "3-Digit Security No.")]
+        public int CardSecurityNo { get; set; }
+
+        // Navigational Properties.
         [ForeignKey("Customer")]
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
         public List<Booking> Bookings { get; set; }
-
-        public List<Job> Jobs { get; set; }
     }
 }

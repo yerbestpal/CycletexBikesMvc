@@ -12,7 +12,7 @@ namespace CycletexBikesMvc.Models
     /// Provides list of services that can be carried out on bikes.
     /// Renamed from 'Services' because Services is a built in class.
     /// </summary>
-    public enum BikeServices
+    public enum BikeServiceNames
     {
         [Display(Name="Inner Tube Replacement")] InnerTubeReplacement,
         [Display(Name = "Hub Service")] HubService,
