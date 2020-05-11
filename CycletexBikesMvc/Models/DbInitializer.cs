@@ -30,7 +30,7 @@ namespace CycletexBikesMvc.Models
                     CardSecurityNo = 123
                 },
                 new DebitCard {
-                    CardNumber = "0000000000000000",
+                    CardNumber = "2222222222222222",
                     CardExpiryDate = DateTime.Today.AddDays(365),
                     CardSecurityNo = 123
                 },
@@ -85,9 +85,6 @@ namespace CycletexBikesMvc.Models
                     PurchaseDate = DateTime.Now.AddDays(-150)
                 }
             };
-
-
-            context.SaveChanges();
 
             if (!context.Users.Any())
             {
@@ -325,7 +322,7 @@ namespace CycletexBikesMvc.Models
                         Email = "customer2@email.com",
                         Name = "Customer Carl",
                         Bikes = bikes.GetRange(0, 3),
-                        DebitCards = cards.GetRange(1, 2)
+                        DebitCards = cards.GetRange(2, 2)
                     };
 
                     customerManager.Create(customer2, "1");

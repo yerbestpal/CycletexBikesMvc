@@ -23,17 +23,17 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Bikes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Bike, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.Bikes, new SelectList(Model.Bikes, "", "Model"), new { htmlAttributes = new { @class = "form-control", id = "BikeDropDown" } })
+                        @Html.DropDownListFor(model => model.Bike, Model.Bikes, new { htmlAttributes = new { @class = "form-control", id = "BikeDropDown" } })
                         @Html.ValidationMessageFor(model => model.Bikes, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DebitCards, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.DebitCard, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.DebitCards, new SelectList(Model.DebitCards, "", "CardNumber"), new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
+                        @Html.DropDownListFor(model => model.DebitCard, Model.DebitCards, new { htmlAttributes = new { @class = "form-control", id = "DebitCardDropDown" } })
                         @Html.ValidationMessageFor(model => model.DebitCards, "", new { @class = "text-danger" })
                     </div>
                 </div>

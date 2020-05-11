@@ -37,36 +37,86 @@ namespace CycletexBikesMvc.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            string userId = User.Identity.GetUserId();
-            List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == userId).ToList();
-            List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
-            List<BikeService> services = context.BikeServices.ToList();
-
-            CreateBookingViewModel viewModel = new CreateBookingViewModel
+            if (ModelState.IsValid)
             {
-                Date = DateTime.Now.AddHours(2),  // Default value
-                Bikes = bikes,
-                DebitCards = cards,
-                Services = services
-            };
+                try
+                {
+                    string userId = User.Identity.GetUserId();
+                    List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == userId).ToList();
+                    List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
+                    List<BikeService> services = context.BikeServices.ToList();
 
-            return View(viewModel);
+                    // SelectListItem required properties
+                    // text = name
+                    // value = id
+                    // selected = selectedBike - not necessary
+                    List<SelectListItem> bikesSelectList = new List<SelectListItem>();
+                    foreach (Bike bike in bikes)
+                    {
+                        bikesSelectList.Add(new SelectListItem() {
+                            Value = bike.Id.ToString(),
+                            Text = bike.Model
+                        });
+                    }
+
+                    List<SelectListItem> cardsSelectList = new List<SelectListItem>();
+                    foreach (DebitCard card in cards)
+                    {
+                        DebitCardController cardController = new DebitCardController();
+                        string MaskedCardNo = cardController.MaskFirstTwelveCharacters(card.CardNumber);
+                        cardsSelectList.Add(new SelectListItem() { 
+                            Value = card.Id.ToString(),
+                            Text = MaskedCardNo
+                        });
+                    }
+
+                    CreateBookingViewModel viewModel = new CreateBookingViewModel
+                    {
+                        Date = DateTime.Now.AddHours(2),  // Default value
+                        Bikes = bikesSelectList,
+                        DebitCards = cardsSelectList,
+                        Services = services
+                    };
+
+                    return View(viewModel);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Booking/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateBookingViewModel viewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                try
+                {
+                    // get bike by id from db
 
-                return RedirectToAction("Index");
+                    // assign hard coded price to booking fee
+
+                    Booking Booking = new Booking()
+                    {
+                        Date = viewModel.Date,
+                        CheckInDate = viewModel.Date.AddDays(2),
+                        CheckOutDate = viewModel.Date.AddDays(3),
+                    };
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Booking/Edit/5

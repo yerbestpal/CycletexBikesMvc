@@ -13,9 +13,6 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Bike
     {
-        private int myProperty;
-        private string name;
-
         [Key]
         public int Id { get; set; }
 
