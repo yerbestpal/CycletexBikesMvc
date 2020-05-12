@@ -9,6 +9,10 @@
 
     <title>Landing Page - Start Bootstrap Theme</title>
 
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 
