@@ -4,7 +4,7 @@
 // note: There are a couple of different approaches to seeding used here. This is because I initially thought that
 //       the first value being added to the database for every model was null, which I thought was being caused by
 //       using GetRange() to add lists of items to the database. Turns out I just couldn't see the first number
-//       because of the dark theme.
+//       because of the dark theme! At least it demonstrates different approaches.
 
 using System;
 using System.Collections.Generic;

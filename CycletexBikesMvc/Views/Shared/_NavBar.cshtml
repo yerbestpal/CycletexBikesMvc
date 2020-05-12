@@ -22,6 +22,13 @@
                             @Html.ActionLink("Create a Booking", "Create", "Booking", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                         </li>
                     }
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item nav-link">
+                            @Html.ActionLink("View All Bookings", "ViewAllBookings", "Booking", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
+                        </li>
+                    }
                 }
                 else
                 {
