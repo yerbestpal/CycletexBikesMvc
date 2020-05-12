@@ -1,4 +1,12 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 12/05/20
+
+// note: There are a couple of different approaches to seeding used here. This is because I initially thought that
+//       the first value being added to the database for every model was null, which I thought was being caused by
+//       using GetRange() to add lists of items to the database. Turns out I just couldn't see the first number
+//       because of the dark theme.
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
@@ -47,44 +55,46 @@ namespace CycletexBikesMvc.Models
             };
 
             // Create Bikes
-            List<Bike> bikes = new List<Bike>
+            Bike bike1 = new Bike
             {
-                new Bike
-                {
-                    BikeType = Enum.GetName(typeof(BikeTypes), 1),
-                    Brand = "SportX",
-                    Model = "Type 2",
-                    PurchaseDate = DateTime.Now.AddDays(-200)
-                },
-                new Bike
-                {
-                    BikeType = Enum.GetName(typeof(BikeTypes), 2),
-                    Brand = "MegaBikes",
-                    Model = "Ergo",
-                    PurchaseDate = DateTime.Now.AddDays(-10)
-                },
-                new Bike
-                {
-                    BikeType = Enum.GetName(typeof(BikeTypes), 3),
-                    Brand = "Eurotrail",
-                    Model = "Off-Road Pro",
-                    PurchaseDate = DateTime.Now.AddDays(-200)
-                },
-                new Bike
-                {
-                    BikeType = Enum.GetName(typeof(BikeTypes), 4),
-                    Brand = "Evans",
-                    Model = "Roadster",
-                    PurchaseDate = DateTime.Now
-                },
-                new Bike
-                {
-                    BikeType = Enum.GetName(typeof(BikeTypes), 5),
-                    Brand = "Acline",
-                    Model = "Global",
-                    PurchaseDate = DateTime.Now.AddDays(-150)
-                }
+                BikeType = Enum.GetName(typeof(BikeTypes), 1),
+                Brand = "SportX",
+                Model = "Type 2",
+                PurchaseDate = DateTime.Now.AddDays(-200)
             };
+
+            Bike bike2 = new Bike
+            {
+                BikeType = Enum.GetName(typeof(BikeTypes), 2),
+                Brand = "MegaBikes",
+                Model = "Ergo",
+                PurchaseDate = DateTime.Now.AddDays(-10)
+            };
+
+            Bike bike3 = new Bike
+            {
+                BikeType = Enum.GetName(typeof(BikeTypes), 3),
+                Brand = "Eurotrail",
+                Model = "Off-Road Pro",
+                PurchaseDate = DateTime.Now.AddDays(-200)
+            };
+
+            Bike bike4 = new Bike
+            {
+                BikeType = Enum.GetName(typeof(BikeTypes), 4),
+                Brand = "Evans",
+                Model = "Roadster",
+                PurchaseDate = DateTime.Now
+            };
+
+            Bike bike5 = new Bike
+            {
+                BikeType = Enum.GetName(typeof(BikeTypes), 5),
+                Brand = "Acline",
+                Model = "Global",
+                PurchaseDate = DateTime.Now.AddDays(-150)
+            };
+
 
             // Seed Users
             if (!context.Users.Any())
@@ -281,7 +291,7 @@ namespace CycletexBikesMvc.Models
                         UserName = "custome1r@email.com",
                         Email = "customer1@email.com",
                         Name = "Customer Carl",
-                        Bikes = bikes,
+                        Bikes = new List<Bike> { bike1, bike2, bike3 },
                         DebitCards = cards.GetRange(0, 2)
                     };
 
@@ -305,7 +315,7 @@ namespace CycletexBikesMvc.Models
                         UserName = "customer2@email.com",
                         Email = "customer2@email.com",
                         Name = "Customer Carl",
-                        Bikes = bikes.GetRange(0, 3),
+                        Bikes = new List<Bike> { bike4, bike5 },
                         DebitCards = cards.GetRange(2, 2)
                     };
 
@@ -358,13 +368,21 @@ namespace CycletexBikesMvc.Models
                 }
             }
 
+            // Seed Bikes
+            if (!context.Bikes.Any())
+            {
+                context.Bikes.Add(bike1);
+                context.Bikes.Add(bike2);
+                context.Bikes.Add(bike3);
+                context.Bikes.Add(bike4);
+                context.Bikes.Add(bike5);
+            }
+
             // Seed CreditCards
             if (!context.DebitCards.Any())
                 context.DebitCards.AddRange(cards);
 
-            // Seed Bikes
-            if (!context.Bikes.Any())
-                context.Bikes.AddRange(bikes);
+            
 
             context.SaveChanges();
 

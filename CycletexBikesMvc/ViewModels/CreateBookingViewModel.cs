@@ -17,8 +17,8 @@ namespace CycletexBikesMvc.ViewModels
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime Date { get; set; }
 
-        public List<SelectListItem> Bikes { get; set; }  // Populates dropDownListFor()
-        public int Bike { get; set; }  // Stores the Id of the selected item
+        public List<Bike> Bikes { get; set; }  // Populates dropDownListFor()
+        public Bike Bike { get; set; }  // Stores the Id of the selected item
 
         public List<SelectListItem> DebitCards { get; set; }
         public int DebitCard { get; set; }

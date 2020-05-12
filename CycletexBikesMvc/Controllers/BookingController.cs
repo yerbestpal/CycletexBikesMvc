@@ -53,14 +53,14 @@ namespace CycletexBikesMvc.Controllers
                     // text = name
                     // value = id
                     // selected = selectedBike - not necessary
-                    List<SelectListItem> bikesSelectList = new List<SelectListItem>();
-                    foreach (Bike bike in bikes)
-                    {
-                        bikesSelectList.Add(new SelectListItem() {
-                            Value = bike.Id.ToString(),
-                            Text = bike.Model
-                        });
-                    }
+                    //List<SelectListItem> bikesSelectList = new List<SelectListItem>();
+                    //foreach (Bike bike in bikes)
+                    //{
+                    //    bikesSelectList.Add(new SelectListItem() {
+                    //        Value = bike.Id.ToString(),
+                    //        Text = bike.Model
+                    //    });
+                    //}
 
                     List<SelectListItem> cardsSelectList = new List<SelectListItem>();
                     foreach (DebitCard card in cards)
@@ -85,7 +85,7 @@ namespace CycletexBikesMvc.Controllers
                     CreateBookingViewModel viewModel = new CreateBookingViewModel
                     {
                         Date = DateTime.Now.AddHours(2),  // Default value
-                        Bikes = bikesSelectList,
+                        Bikes = bikes,
                         DebitCards = cardsSelectList,
                         BikeServices = servicesSelectList
                     };
@@ -106,18 +106,28 @@ namespace CycletexBikesMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateBookingViewModel viewModel)        
         {
+            int BikeId = viewModel.Bike.Id;
+
+            if (BikeId == 0)
+                return View();
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    int BikeId = viewModel.Bike;
+                    // foreach booking in database
+                        // if any bookings have the same date as this booking
+                            // return to view and send notification
+                    
                     Booking Booking = new Booking()
                     {
                         Date = viewModel.Date,
                         CheckInDate = viewModel.Date.AddDays(2),
                         CheckOutDate = viewModel.Date.AddDays(3),
                         Total = 30,
-                        BikeId = BikeId
+                        BikeId = BikeId,
+                        Customer = (Customer)context.Users.Find(User.Identity.GetUserId()),
+                        DebitCardId = viewModel.DebitCard
                     };
 
                     context.Bookings.Add(Booking);
