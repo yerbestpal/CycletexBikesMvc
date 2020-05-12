@@ -123,7 +123,7 @@ namespace CycletexBikesMvc.Controllers
                     {
                         if (booking.Date == viewModel.Date)
                         {
-
+                            // notification here
                             return View();
                         }
                     }
