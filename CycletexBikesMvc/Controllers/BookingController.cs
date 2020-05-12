@@ -107,27 +107,55 @@ namespace CycletexBikesMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateBookingViewModel viewModel)        
         {
-            int BikeId = viewModel.SelectedBikeId;
-            //Bike selectedBike = viewModel.Bike;
-
-            if (BikeId == 0)
-            {
-                this.AddNotification("Database error: Cannot find bike in system", NotificationType.ERROR);
-                return View();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
+                    int BikeId = viewModel.SelectedBikeId;
+                    string userId = User.Identity.GetUserId();
+
+                    // Validation
+                    if (BikeId == 0)
+                    {
+                        this.AddNotification("Database error: Cannot find bike in system", NotificationType.ERROR);
+                        return View();
+                    }
+
+                    if (userId == null)
+                        return RedirectToAction("Login", "Account");
+
+                    if (viewModel.Date < DateTime.Now)
+                    {
+                        this.AddNotification("Only a future date may be selected", NotificationType.ERROR);
+                        // Redirect to the create action, passing the view method, so dropdownlists are populated with valid data
+                        return RedirectToAction("Create", new { id = userId });
+                    }
+
+                    if (viewModel.Date == viewModel.Date.AddHours(2))
+                    {
+                        this.AddNotification("We request at least 2 hours before any booking", NotificationType.ERROR);
+                        return RedirectToAction("Create", new { id = userId });
+                    }
+
+                    if (viewModel.Date == viewModel.Date.AddMonths(2))
+                    {
+                        this.AddNotification("You may only book 2 months in advance", NotificationType.ERROR);
+                        return RedirectToAction("Create", new { id = userId });
+                    }
+
                     List<Booking> bookingsInDatabase = context.Bookings.ToList<Booking>();
                     foreach (Booking booking in bookingsInDatabase)
                     {
                         if (booking.Date == viewModel.Date)
                         {
                             this.AddNotification("Date Unavailable", NotificationType.ERROR);
-                            // Redirect to the create action, passing the view method, so dropdownlists are populated with valid data
-                            return RedirectToAction("Create", new { id = User.Identity.GetUserId() });
+                            return RedirectToAction("Create", new { id = userId });
+                        }
+
+                        if (booking.Date == viewModel.Date.AddMinutes(15))
+                        {
+                            this.AddNotification("Please choose a booking " + (booking.Date - viewModel.Date.AddMinutes(15)) + "minutes later", NotificationType.ERROR);
+                            return RedirectToAction("Create", new { id = userId });
                         }
                     }
 
