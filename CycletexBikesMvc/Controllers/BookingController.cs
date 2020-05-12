@@ -38,6 +38,13 @@ namespace CycletexBikesMvc.Controllers
         public ActionResult ViewAllBookings()
         {
             List<Booking> AllBookingsInDb = context.Bookings.ToList<Booking>();
+
+            if (AllBookingsInDb.Count() == 0)
+            {
+                this.AddNotification("No bookings present", NotificationType.WARNING);
+                return View(AllBookingsInDb);
+            }
+
             return View(AllBookingsInDb);
         }
 
