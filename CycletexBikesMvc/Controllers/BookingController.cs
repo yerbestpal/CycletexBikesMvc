@@ -144,17 +144,17 @@ namespace CycletexBikesMvc.Controllers
                     }
 
                     List<Booking> bookingsInDatabase = context.Bookings.ToList<Booking>();
-                    foreach (Booking booking in bookingsInDatabase)
+                    foreach (Booking existingBooking in bookingsInDatabase)
                     {
-                        if (booking.Date == viewModel.Date)
+                        if (existingBooking.Date == viewModel.Date)
                         {
                             this.AddNotification("Date Unavailable", NotificationType.ERROR);
                             return RedirectToAction("Create", new { id = userId });
                         }
 
-                        if (booking.Date < viewModel.Date.AddMinutes(15))
+                        if (!(viewModel.Date < existingBooking.Date) && !(viewModel.Date > existingBooking.Date.AddMinutes(15)))
                         {
-                            this.AddNotification("Please choose a booking " + (viewModel.Date.AddMinutes(15) - booking.Date) + "minutes later", NotificationType.ERROR);
+                            this.AddNotification("This time slot is already booked", NotificationType.ERROR);
                             return RedirectToAction("Create", new { id = userId });
                         }
                     }
