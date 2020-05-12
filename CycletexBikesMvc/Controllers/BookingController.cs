@@ -1,4 +1,8 @@
-﻿using CycletexBikesMvc.Models;
+﻿// name: Ross McLean
+// date: 12/05/20
+
+using CycletexBikesMvc.Extensions;
+using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
@@ -49,18 +53,15 @@ namespace CycletexBikesMvc.Controllers
                     List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
                     List<BikeService> services = context.BikeServices.ToList();
 
-                    // SelectListItem required properties
-                    // text = name
-                    // value = id
-                    // selected = selectedBike - not necessary
-                    //List<SelectListItem> bikesSelectList = new List<SelectListItem>();
-                    //foreach (Bike bike in bikes)
-                    //{
-                    //    bikesSelectList.Add(new SelectListItem() {
-                    //        Value = bike.Id.ToString(),
-                    //        Text = bike.Model
-                    //    });
-                    //}
+                    List<SelectListItem> bikesSelectList = new List<SelectListItem>();
+                    foreach (Bike bike in bikes)
+                    {
+                        bikesSelectList.Add(new SelectListItem()
+                        {
+                            Value = bike.Id.ToString(),
+                            Text = bike.Model
+                        });
+                    }
 
                     List<SelectListItem> cardsSelectList = new List<SelectListItem>();
                     foreach (DebitCard card in cards)
@@ -85,7 +86,7 @@ namespace CycletexBikesMvc.Controllers
                     CreateBookingViewModel viewModel = new CreateBookingViewModel
                     {
                         Date = DateTime.Now.AddHours(2),  // Default value
-                        Bikes = bikes,
+                        Bikes = bikesSelectList,
                         DebitCards = cardsSelectList,
                         BikeServices = servicesSelectList
                     };
@@ -106,41 +107,44 @@ namespace CycletexBikesMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateBookingViewModel viewModel)        
         {
-            int BikeId = viewModel.Bike.Id;
+            int BikeId = viewModel.SelectedBikeId;
+            //Bike selectedBike = viewModel.Bike;
 
             if (BikeId == 0)
+            {
+                this.AddNotification("Database error: Cannot find bike in system", NotificationType.ERROR);
                 return View();
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // foreach booking in database
-                    // if any bookings have the same date as this booking
-                    // return to view and send notification
-
-                    foreach (Booking booking in context.Bookings)
+                    List<Booking> bookingsInDatabase = context.Bookings.ToList<Booking>();
+                    foreach (Booking booking in bookingsInDatabase)
                     {
                         if (booking.Date == viewModel.Date)
                         {
-                            // notification here
-                            return View();
+                            this.AddNotification("Date Unavailable", NotificationType.ERROR);
+                            // Redirect to the create action, passing the view method, so dropdownlists are populated with valid data
+                            return RedirectToAction("Create", new { id = User.Identity.GetUserId() });
                         }
                     }
-                    
-                    Booking Booking = new Booking()
+
+                    Booking NewBooking = new Booking()
                     {
                         Date = viewModel.Date,
                         CheckInDate = viewModel.Date.AddDays(2),
                         CheckOutDate = viewModel.Date.AddDays(3),
                         Total = 30,
                         BikeId = BikeId,
-                        Customer = (Customer)context.Users.Find(User.Identity.GetUserId()),
+                        CustomerId = User.Identity.GetUserId(),
                         DebitCardId = viewModel.DebitCard
                     };
 
-                    context.Bookings.Add(Booking);
+                    context.Bookings.Add(NewBooking);
                     context.SaveChanges();
+                    this.AddNotification("Successfully Booked", NotificationType.SUCCESS);
                     return RedirectToAction("Index");
                 }
                 catch(Exception ex)

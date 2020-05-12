@@ -14,11 +14,12 @@ namespace CycletexBikesMvc.ViewModels
     /// </summary>
     public class CreateBookingViewModel
     {
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        public List<Bike> Bikes { get; set; }  // Populates dropDownListFor()
-        public Bike Bike { get; set; }  // Stores the Id of the selected item
+        public List<SelectListItem> Bikes { get; set; }  // Populates dropDownListFor()
+        public int SelectedBikeId { get; set; }  // Stores the Id of the selected item
 
         public List<SelectListItem> DebitCards { get; set; }
         public int DebitCard { get; set; }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 12/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

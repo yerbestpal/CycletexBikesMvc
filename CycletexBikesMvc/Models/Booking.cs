@@ -17,7 +17,8 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
 
-        //[Required]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         //[Required]
