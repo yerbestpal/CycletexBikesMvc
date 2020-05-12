@@ -4,6 +4,10 @@
     ViewBag.Title = "Create Booking";
 }
 
+@section styles {
+    @Styles.Render("~/Content/bootstrap-datetimepicker")
+}
+
 <section class="">
     <div class="container">
         <h1 class="mb-5">Create Booking</h1>
@@ -58,3 +62,7 @@
         </div>
     </div>
 </section>
+
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+}
