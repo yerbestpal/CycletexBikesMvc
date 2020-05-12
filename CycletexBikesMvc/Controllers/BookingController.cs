@@ -31,6 +31,36 @@ namespace CycletexBikesMvc.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Gets all Bookings from the database
+        /// </summary>
+        /// <returns>ViewAllBookings view</returns>
+        public ActionResult ViewAllBookings()
+        {
+            List<Booking> AllBookingsInDb = context.Bookings.ToList<Booking>();
+            return View(AllBookingsInDb);
+        }
+
+        /// <summary>
+        /// Gets all Bookings pertaining to an individual Customer
+        /// </summary>
+        /// <returns>ViewAllCustomersBookings view</returns>
+        public ActionResult ViewAllCustomersBookings(string id)
+        {
+            if (id is null)
+                throw new ArgumentNullException(nameof(id));
+
+            List<Booking> AllCustomersBookingsInDb = context.Bookings.Where(b => b.CustomerId == id).ToList<Booking>();
+
+            if (AllCustomersBookingsInDb.Count() == 0)
+            {
+                this.AddNotification("You have made no bookings", NotificationType.WARNING);
+                return View(AllCustomersBookingsInDb);
+            }
+
+            return View(AllCustomersBookingsInDb);
+        }
+
         // GET: Booking/Details/5
         public ActionResult Details(int id)
         {
@@ -41,8 +71,8 @@ namespace CycletexBikesMvc.Controllers
         [HttpGet]
         public ActionResult Create(string id)
         {
-            if (id == null)
-                return RedirectToAction("Login", "Account");
+            if (id is null)
+                throw new ArgumentNullException(nameof(id));
 
             if (ModelState.IsValid)
             {
@@ -114,13 +144,13 @@ namespace CycletexBikesMvc.Controllers
                     int BikeId = viewModel.SelectedBikeId;
                     string userId = User.Identity.GetUserId();
 
-                    // Validation
                     if (BikeId == 0)
                     {
                         this.AddNotification("Database error: Cannot find bike in system", NotificationType.ERROR);
                         return View();
                     }
 
+                    // This is unlikely to trigger but here as a precaution
                     if (userId == null)
                         return RedirectToAction("Login", "Account");
 
@@ -131,13 +161,13 @@ namespace CycletexBikesMvc.Controllers
                         return RedirectToAction("Create", new { id = userId });
                     }
 
-                    if (viewModel.Date == viewModel.Date.AddHours(2))
+                    if (viewModel.Date < DateTime.Now.AddHours(2))
                     {
                         this.AddNotification("We request at least 2 hours before any booking", NotificationType.ERROR);
                         return RedirectToAction("Create", new { id = userId });
                     }
 
-                    if (viewModel.Date == viewModel.Date.AddMonths(2))
+                    if (viewModel.Date > viewModel.Date.AddMonths(2))
                     {
                         this.AddNotification("You may only book 2 months in advance", NotificationType.ERROR);
                         return RedirectToAction("Create", new { id = userId });
@@ -159,6 +189,7 @@ namespace CycletexBikesMvc.Controllers
                         }
                     }
 
+                    // Success path
                     Booking NewBooking = new Booking()
                     {
                         Date = viewModel.Date,
@@ -173,7 +204,7 @@ namespace CycletexBikesMvc.Controllers
                     context.Bookings.Add(NewBooking);
                     context.SaveChanges();
                     this.AddNotification("Successfully Booked", NotificationType.SUCCESS);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ViewAllCustomersBookings", new { id = userId });
                 }
                 catch(Exception ex)
                 {
