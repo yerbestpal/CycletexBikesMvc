@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,10 +26,44 @@ namespace CycletexBikesMvc.Controllers
         /// </summary>
         private readonly ApplicationDbContext context = new ApplicationDbContext();
 
-        // GET: Booking
-        public ActionResult Index()
+        // GET: Booking/Details/5
+        /// <summary>
+        /// Returns view showing various details from individual bookings
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Details view</returns>
+        public ActionResult Details(int? id)
         {
-            return View();
+            string LoggedInUserId = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (LoggedInUserId == null)
+                        return RedirectToAction("Login", "Account");
+                    if (id == null) 
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    Booking booking = context.Bookings.Find(id);
+                    if (booking == null)
+                        return HttpNotFound();
+                    return View(booking);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    this.AddNotification("Booking not found in database", NotificationType.ERROR);
+                    if (User.IsInRole("Customer"))
+                        return RedirectToAction("ViewAllCustomersBookings", LoggedInUserId);
+                    else
+                        return RedirectToAction("ViewAllBookings");
+                }
+            }
+            this.AddNotification("Error: modelState is invalid", NotificationType.ERROR);
+            if (User.IsInRole("Customer"))
+                return RedirectToAction("ViewAllCustomersBookings", LoggedInUserId);
+            else
+                return RedirectToAction("ViewAllBookings");
         }
 
         /// <summary>
@@ -66,12 +101,6 @@ namespace CycletexBikesMvc.Controllers
             }
 
             return View(AllCustomersBookingsInDb);
-        }
-
-        // GET: Booking/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: Booking/Create
@@ -148,6 +177,8 @@ namespace CycletexBikesMvc.Controllers
             {
                 try
                 {
+                    // Validation
+
                     int BikeId = viewModel.SelectedBikeId;
                     string userId = User.Identity.GetUserId();
 
@@ -205,7 +236,7 @@ namespace CycletexBikesMvc.Controllers
                         Total = 30,
                         BikeId = BikeId,
                         CustomerId = User.Identity.GetUserId(),
-                        DebitCardId = viewModel.DebitCard
+                        DebitCard = context.DebitCards.Find(viewModel.DebitCard)
                     };
 
                     context.Bookings.Add(NewBooking);
@@ -221,6 +252,10 @@ namespace CycletexBikesMvc.Controllers
             }
             return View();
         }
+
+        // The below code has been commented out as it is not used, and has been left in place as proof of understanding, or something.
+
+        /*
 
         // GET: Booking/Edit/5
         public ActionResult Edit(int id)
@@ -265,5 +300,12 @@ namespace CycletexBikesMvc.Controllers
                 return View();
             }
         }
+
+        // GET: Booking
+        public ActionResult Index()
+        {
+            return View();
+        }
+        */
     }
 }

@@ -392,6 +392,7 @@
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Booking\ViewAllCustomersBookings.cshtml" />
     <Content Include="Views\Booking\ViewAllBookings.cshtml" />
+    <Content Include="Views\Booking\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

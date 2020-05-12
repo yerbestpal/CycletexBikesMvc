@@ -17,7 +17,6 @@
         <h1 class="mb-5">Create Booking</h1>
         <br />
         <hr />
-        <br />
         @Html.Partial("_Notifications")
         <br />
         <div class="row">
@@ -73,6 +72,8 @@
 </section>
 
 <script>
+    // bootstrap-datetimepicker function
+    // Provides a functioning calendar and time picker
     $(function () {
         $('#Date').datetimepicker(
         {
@@ -80,6 +81,7 @@
             sideBySide: true,
             showTodayButton: true,
             // Using FontAwesome glyphs because Bootstrap glyphs are not included in the Bootstrap NuGet package
+            // Initially I was going to use the official CDN however it had an adverse effect on the greater UI
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
