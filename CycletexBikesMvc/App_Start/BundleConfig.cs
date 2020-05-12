@@ -25,6 +25,15 @@ namespace CycletexBikesMvc
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // Bootstrap-DateTimePicker script bundle
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datetimepicker").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/bootstrap-datetimepicker.js"));
+
+            // Bootstrap-DateTimePicker stylesheet bundle
+            bundles.Add(new StyleBundle("~/Content/bootstrap-datetimepicker").Include(
+                "~/Content/bootstrap-datetimepicker.min.css"));
         }
     }
 }
