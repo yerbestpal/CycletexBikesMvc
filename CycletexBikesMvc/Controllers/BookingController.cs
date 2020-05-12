@@ -152,9 +152,9 @@ namespace CycletexBikesMvc.Controllers
                             return RedirectToAction("Create", new { id = userId });
                         }
 
-                        if (booking.Date == viewModel.Date.AddMinutes(15))
+                        if (booking.Date < viewModel.Date.AddMinutes(15))
                         {
-                            this.AddNotification("Please choose a booking " + (booking.Date - viewModel.Date.AddMinutes(15)) + "minutes later", NotificationType.ERROR);
+                            this.AddNotification("Please choose a booking " + (viewModel.Date.AddMinutes(15) - booking.Date) + "minutes later", NotificationType.ERROR);
                             return RedirectToAction("Create", new { id = userId });
                         }
                     }
