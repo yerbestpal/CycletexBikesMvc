@@ -12,6 +12,9 @@
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -82,8 +85,8 @@
 
     <!-- Bootstrap core JavaScript -->
     <!--Path has been changed to reflect custom Bootstrap theme requirements-->
-    <script src="~/Scripts/jquery/jquery.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @*<script src="~/Scripts/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
     <!-- FontAwesome import -->
     <script src="https://kit.fontawesome.com/19df47b718.js" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)

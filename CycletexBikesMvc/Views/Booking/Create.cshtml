@@ -63,6 +63,17 @@
     </div>
 </section>
 
+<script>
+    $(function () {
+        $('#Date').datetimepicker(
+        {
+            format: 'DD-MMM-YYYY HH:mm',
+            sideBySide: true,
+            showTodayButton: true
+        });
+    });
+</script>
+
 @section scripts {
     @Scripts.Render("~/bundles/bootstrap-datetimepicker")
 }

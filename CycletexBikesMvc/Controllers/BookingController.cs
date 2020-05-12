@@ -116,8 +116,17 @@ namespace CycletexBikesMvc.Controllers
                 try
                 {
                     // foreach booking in database
-                        // if any bookings have the same date as this booking
-                            // return to view and send notification
+                    // if any bookings have the same date as this booking
+                    // return to view and send notification
+
+                    foreach (Booking booking in context.Bookings)
+                    {
+                        if (booking.Date == viewModel.Date)
+                        {
+
+                            return View();
+                        }
+                    }
                     
                     Booking Booking = new Booking()
                     {
