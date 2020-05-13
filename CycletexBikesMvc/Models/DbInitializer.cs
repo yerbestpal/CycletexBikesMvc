@@ -5,6 +5,9 @@
 //       the first value being added to the database for every model was null, which I thought was being caused by
 //       using GetRange() to add lists of items to the database. Turns out I just couldn't see the first number
 //       because of the dark theme! At least it demonstrates different approaches.
+//
+// note2: In the future, I would not populate my lists for seeding with the objects immediately because it makes it
+//        impossible to debug them and is time consuming to refactor.
 
 using System;
 using System.Collections.Generic;
@@ -94,6 +97,14 @@ namespace CycletexBikesMvc.Models
                 Model = "Global",
                 PurchaseDate = DateTime.Now.AddDays(-150)
             };
+
+            // To be used for seeding Customers
+            // Placed here so that Bookings can
+            // access them
+            Customer customer1 = null;
+            Customer customer2 = null;
+            Customer customer3 = null;
+            Customer customer4 = null;
 
 
             // Seed Users
@@ -286,7 +297,7 @@ namespace CycletexBikesMvc.Models
                         RequireUppercase = false
                     };
 
-                    var customer1 = new Customer()
+                    customer1 = new Customer()
                     {
                         UserName = "custome1r@email.com",
                         Email = "customer1@email.com",
@@ -310,7 +321,7 @@ namespace CycletexBikesMvc.Models
                         RequireUppercase = false
                     };
 
-                    var customer2 = new Customer()
+                    customer2 = new Customer()
                     {
                         UserName = "customer2@email.com",
                         Email = "customer2@email.com",
@@ -334,7 +345,7 @@ namespace CycletexBikesMvc.Models
                         RequireUppercase = false
                     };
 
-                    var customer3 = new Customer()
+                    customer3 = new Customer()
                     {
                         UserName = "customer3@email.com",
                         Email = "customer3@email.com",
@@ -356,7 +367,7 @@ namespace CycletexBikesMvc.Models
                         RequireUppercase = false
                     };
 
-                    var customer4 = new Customer()
+                    customer4 = new Customer()
                     {
                         UserName = "customer4@email.com",
                         Email = "customer4@email.com",
@@ -577,6 +588,27 @@ namespace CycletexBikesMvc.Models
             DateTime placeholderDate = DateTime.Now;
             List<Booking> bookings = new List<Booking>();
 
+            //var date = placeholderDate.AddDays(-20);
+            //var checkinDate = placeholderDate.AddDays(-18);
+            //var checkoutDate = placeholderDate.AddDays(-16);
+            //var total = 30;
+            //var bikeId = bike1.Id;
+            //var debitCardId = cards[0].Id;
+            //var customerId = new Customer() { Id = "2000" }.Id;
+
+            //Booking b = new Booking
+            //{
+            //    Date = date,
+            //    CheckInDate = checkinDate,
+            //    CheckOutDate = checkoutDate,
+            //    Total = total,
+            //    BikeId = bikeId,
+            //    DebitCardId = debitCardId,
+            //    CustomerId = customerId
+            //};
+
+            //bookings.Add(b);
+
             bookings.Add(new Booking
             {
                 Date = placeholderDate.AddDays(-20),
@@ -584,7 +616,8 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-16),
                 Total = 30,
                 BikeId = bike1.Id,
-                CustomerId = context.Users.Find("1").Id
+                DebitCardId = cards[0].Id,
+                CustomerId = customer1.Id
             });
             bookings.Add(new Booking
             {
@@ -593,7 +626,8 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-16),
                 Total = 250,
                 BikeId = bike2.Id,
-                CustomerId = context.Users.Find("2").Id
+                DebitCardId = cards[1].Id,
+                CustomerId = customer2.Id
             });
             bookings.Add(new Booking
             {
@@ -602,7 +636,8 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-160),
                 Total = 425,
                 BikeId = bike3.Id,
-                CustomerId = context.Users.Find("3").Id
+                DebitCardId = cards[2].Id,
+                CustomerId = customer3.Id
             });
             bookings.Add(new Booking
             {
@@ -611,7 +646,8 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-4),
                 Total = 25,
                 BikeId = bike4.Id,
-                CustomerId = context.Users.Find("4").Id
+                DebitCardId = cards[3].Id,
+                CustomerId = customer4.Id
             });
             bookings.Add(new Booking
             {
@@ -620,7 +656,8 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-356),
                 Total = 37,
                 BikeId = bike5.Id,
-                CustomerId = context.Users.Find("4").Id
+                DebitCardId = cards[3].Id,
+                CustomerId = customer4.Id
             });
 
             //Seed Bookings

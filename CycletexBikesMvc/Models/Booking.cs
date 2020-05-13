@@ -24,9 +24,6 @@ namespace CycletexBikesMvc.Models
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        //[Required]
-        public int BikeId { get; set; }
-
         [DataType(DataType.DateTime)]
         [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CheckInDate { get; set; }
@@ -46,6 +43,10 @@ namespace CycletexBikesMvc.Models
         [ForeignKey("DebitCard")]
         public int DebitCardId { get; set; }
         public DebitCard DebitCard { get; set; }
+
+        [ForeignKey("Bike")]
+        public int BikeId { get; set; }
+        public Bike Bike { get; set; }
 
         public List<Job> Jobs { get; set; }
     }

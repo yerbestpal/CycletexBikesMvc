@@ -27,8 +27,10 @@ namespace CycletexBikesMvc.Models
         public DateTime CompletionTime { get; set; }
         public string Status { get; set; }
 
-        // Navigational Properties
+        // Nav properties are commented out because they interfere with seeding and this class is actually unused.
 
+        // Navigational Properties
+        /*
         [ForeignKey("Booking")]
         public int BookingId { get; set; }
         public Booking Booking { get; set; }
@@ -40,5 +42,6 @@ namespace CycletexBikesMvc.Models
         public List<JobParts> JobParts { get; set; }  // Many to many
         public List<HoursWorked> HoursWorked { get; set; }
         public List<JobServices> JobServices { get; set; }  // Many to many
+        */
     }
 }

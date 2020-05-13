@@ -236,7 +236,7 @@ namespace CycletexBikesMvc.Controllers
                         Total = 30,
                         BikeId = BikeId,
                         CustomerId = User.Identity.GetUserId(),
-                        DebitCard = context.DebitCards.Find(viewModel.DebitCard)
+                        DebitCardId = context.DebitCards.Find(viewModel.DebitCard).Id
                     };
 
                     context.Bookings.Add(NewBooking);
