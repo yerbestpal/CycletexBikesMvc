@@ -1,38 +1,40 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 13/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
-    /// <summary>
-    /// Payment class.
-    /// Facilitates payments for Bookings and Orders.
-    /// </summary>
-    public class Payment
-    {
-        [Key]
-        public int Id { get; set; }
-        public decimal Amount { get; set; }
+	/// <summary>
+	/// Payment class
+	/// Facilitiates payment of Bookings via DebitCards
+	/// </summary>
+	public class Payment
+	{
+		[Key]
+		public int Id { get; set; }
 
-        [Display(Name = "Payment Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
-        public DateTime PaymentDate { get; set; }
+		public bool IsSuccessful { get; set; }
 
-        [Display(Name = "Payment Type")]
-        public PaymentTypes PaymentType { get; set; }
-        public string Status { get; set; }
+		[DataType(DataType.DateTime),
+		 DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+		public DateTime Date { get; set; }
 
-        [Display(Name = "Card Number")]
-        public string CardNumber { get; set; }
+		public decimal Total { get; set; }
 
-        [Display(Name = "Name On Card")]
-        public string NameOnCard { get; set; }
+		// Navigational Properties
 
-        [Display(Name = "Security Code")]
-        public string SecurityCode { get; set; }
+		[ForeignKey("Booking")]
+		public int BookingId { get; set; }
+		public Booking Booking { get; set; }
 
-        [Display(Name = "Expiry Date")]
-        public DateTime ExpiryDate { get; set; }
-    }
+		[ForeignKey("DebitCard")]
+		public int DebitCardId { get; set; }
+		public DebitCard DebitCard { get; set; }
+	}
 }

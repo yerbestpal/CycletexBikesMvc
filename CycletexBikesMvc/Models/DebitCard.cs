@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 13/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,14 +19,23 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Card Holder Name")]
+        public string CardHolderName { get; set; }
+
         [Display(Name = "Card Number")]
         public string CardNumber { get; set; }
 
-        [Display(Name = "Card Expiry Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [Display(Name = "Card Expiry Date"),
+         DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}"),
+         DataType(DataType.DateTime)]
         public DateTime CardExpiryDate { get; set; }
 
-        [Display(Name = "3-Digit Security No.")]
-        public int CardSecurityNo { get; set; }
+        [Display(Name = "3-Digit CVV2 Number")]
+        public int CVV2 { get; set; }
+
+        [Display(Name = "Expiry Date"),
+         DisplayFormat(DataFormatString = "{0:dd-MM}")]
+        public DateTime ExpiryDate { get; set; }
 
         // Navigational Properties.
         [ForeignKey("Customer")]
@@ -31,5 +43,6 @@ namespace CycletexBikesMvc.Models
         public Customer Customer { get; set; }
 
         public List<Booking> Bookings { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 }

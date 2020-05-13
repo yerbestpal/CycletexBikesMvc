@@ -32,7 +32,7 @@ namespace CycletexBikesMvc.Models
         [Display(Name = "Check-out Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CheckOutDate { get; set; }
 
-        public int Total { get; set; }
+        public decimal Total { get; set; }
 
         // Navigational properties
 
@@ -40,9 +40,9 @@ namespace CycletexBikesMvc.Models
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        [ForeignKey("DebitCard")]
-        public int DebitCardId { get; set; }
-        public DebitCard DebitCard { get; set; }
+        [ForeignKey("Payment")]
+        public int PaymentId { get; set; }
+        public DebitCard Payment { get; set; }
 
         [ForeignKey("Bike")]
         public int BikeId { get; set; }

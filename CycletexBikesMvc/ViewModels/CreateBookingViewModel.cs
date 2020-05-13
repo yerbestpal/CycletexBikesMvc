@@ -26,5 +26,7 @@ namespace CycletexBikesMvc.ViewModels
 
         public List<SelectListItem> BikeServices { get; set; }
         public int BikeService { get; set; }
+
+        public bool IsPaid { get; set; }
     }
 }
