@@ -54,14 +54,14 @@ namespace CycletexBikesMvc.Controllers
                     Console.WriteLine("Error: " + ex.Message);
                     this.AddNotification("Booking not found in database", NotificationType.ERROR);
                     if (User.IsInRole("Customer"))
-                        return RedirectToAction("ViewAllCustomersBookings", LoggedInUserId);
+                        return RedirectToAction("ViewAllCustomersBookings", new { id = LoggedInUserId });
                     else
                         return RedirectToAction("ViewAllBookings");
                 }
             }
             this.AddNotification("Error: modelState is invalid", NotificationType.ERROR);
             if (User.IsInRole("Customer"))
-                return RedirectToAction("ViewAllCustomersBookings", LoggedInUserId);
+                return RedirectToAction("ViewAllCustomersBookings", new { id = LoggedInUserId });
             else
                 return RedirectToAction("ViewAllBookings");
         }

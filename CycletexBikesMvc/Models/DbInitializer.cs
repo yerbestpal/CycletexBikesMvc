@@ -386,7 +386,7 @@ namespace CycletexBikesMvc.Models
 
             context.SaveChanges();
 
-            // Create Services.
+            // Create Services
             List<BikeService> services = new List<BikeService>
             {
                 new BikeService
@@ -567,9 +567,66 @@ namespace CycletexBikesMvc.Models
 
             };
 
+            // Seed Services
             if (!context.BikeServices.Any())
                 context.BikeServices.AddRange(services);
             
+            context.SaveChanges();
+
+            // Create Bookings
+            DateTime placeholderDate = DateTime.Now;
+            List<Booking> bookings = new List<Booking>();
+
+            bookings.Add(new Booking
+            {
+                Date = placeholderDate.AddDays(-20),
+                CheckInDate = placeholderDate.AddDays(-18),
+                CheckOutDate = placeholderDate.AddDays(-16),
+                Total = 30,
+                BikeId = bike1.Id,
+                CustomerId = context.Users.Find("1").Id
+            });
+            bookings.Add(new Booking
+            {
+                Date = placeholderDate.AddDays(-20),
+                CheckInDate = placeholderDate.AddDays(-18),
+                CheckOutDate = placeholderDate.AddDays(-16),
+                Total = 250,
+                BikeId = bike2.Id,
+                CustomerId = context.Users.Find("2").Id
+            });
+            bookings.Add(new Booking
+            {
+                Date = placeholderDate.AddDays(-200),
+                CheckInDate = placeholderDate.AddDays(-180),
+                CheckOutDate = placeholderDate.AddDays(-160),
+                Total = 425,
+                BikeId = bike3.Id,
+                CustomerId = context.Users.Find("3").Id
+            });
+            bookings.Add(new Booking
+            {
+                Date = placeholderDate.AddDays(-8),
+                CheckInDate = placeholderDate.AddDays(-6),
+                CheckOutDate = placeholderDate.AddDays(-4),
+                Total = 25,
+                BikeId = bike4.Id,
+                CustomerId = context.Users.Find("4").Id
+            });
+            bookings.Add(new Booking
+            {
+                Date = placeholderDate.AddDays(-360),
+                CheckInDate = placeholderDate.AddDays(-358),
+                CheckOutDate = placeholderDate.AddDays(-356),
+                Total = 37,
+                BikeId = bike5.Id,
+                CustomerId = context.Users.Find("4").Id
+            });
+
+            //Seed Bookings
+            if (!context.Bookings.Any())
+                context.Bookings.AddRange(bookings);
+
             context.SaveChanges();
         }
     }

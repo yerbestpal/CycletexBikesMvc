@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 13/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,10 +27,12 @@ namespace CycletexBikesMvc.Models
         //[Required]
         public int BikeId { get; set; }
 
-        [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CheckInDate { get; set; }
 
-        [Display(Name = "Check-out Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Check-out Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CheckOutDate { get; set; }
 
         public int Total { get; set; }
