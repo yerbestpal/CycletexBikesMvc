@@ -25,16 +25,11 @@ namespace CycletexBikesMvc.Models
         [Display(Name = "Card Number")]
         public string CardNumber { get; set; }
 
-        [Display(Name = "Card Expiry Date"),
-         DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}"),
-         DataType(DataType.DateTime)]
-        public DateTime CardExpiryDate { get; set; }
-
         [Display(Name = "3-Digit CVV2 Number")]
         public int CVV2 { get; set; }
 
         [Display(Name = "Expiry Date"),
-         DisplayFormat(DataFormatString = "{0:dd-MM}")]
+         DisplayFormat(DataFormatString = "{0:dd-mm}")]
         public DateTime ExpiryDate { get; set; }
 
         // Navigational Properties.
@@ -42,7 +37,6 @@ namespace CycletexBikesMvc.Models
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public List<Booking> Bookings { get; set; }
         public List<Payment> Payments { get; set; }
     }
 }

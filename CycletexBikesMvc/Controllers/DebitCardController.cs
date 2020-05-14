@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 14/05/20
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +14,18 @@ namespace CycletexBikesMvc.Controllers
         // GET: DebitCard
         public ActionResult Index()
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    throw;
+                }
+            }
         }
 
         // GET: DebitCard/Details/5

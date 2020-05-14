@@ -116,7 +116,6 @@ namespace CycletexBikesMvc.Controllers
                 {
                     string userId = User.Identity.GetUserId();
                     List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == userId).ToList();
-                    List<DebitCard> cards = context.DebitCards.Where(d => d.CustomerId == userId).ToList();
                     List<BikeService> services = context.BikeServices.ToList();
 
                     List<SelectListItem> bikesSelectList = new List<SelectListItem>();
@@ -126,17 +125,6 @@ namespace CycletexBikesMvc.Controllers
                         {
                             Value = bike.Id.ToString(),
                             Text = bike.Model
-                        });
-                    }
-
-                    List<SelectListItem> cardsSelectList = new List<SelectListItem>();
-                    foreach (DebitCard card in cards)
-                    {
-                        DebitCardController cardController = new DebitCardController();
-                        string MaskedCardNo = cardController.MaskFirstTwelveCharacters(card.CardNumber);
-                        cardsSelectList.Add(new SelectListItem() { 
-                            Value = card.Id.ToString(),
-                            Text = MaskedCardNo
                         });
                     }
 
@@ -153,7 +141,6 @@ namespace CycletexBikesMvc.Controllers
                     {
                         Date = DateTime.Now.AddHours(2),  // Default value
                         Bikes = bikesSelectList,
-                        DebitCards = cardsSelectList,
                         BikeServices = servicesSelectList
                     };
 
@@ -235,8 +222,7 @@ namespace CycletexBikesMvc.Controllers
                         CheckOutDate = viewModel.Date.AddDays(3),
                         Total = 30,
                         BikeId = BikeId,
-                        CustomerId = User.Identity.GetUserId(),
-                        DebitCardId = context.DebitCards.Find(viewModel.DebitCard).Id
+                        CustomerId = User.Identity.GetUserId()
                     };
 
                     context.Bookings.Add(NewBooking);

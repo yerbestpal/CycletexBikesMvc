@@ -21,9 +21,6 @@ namespace CycletexBikesMvc.ViewModels
         public List<SelectListItem> Bikes { get; set; }  // Populates dropDownListFor()
         public int SelectedBikeId { get; set; }  // Stores the Id of the selected item
 
-        public List<SelectListItem> DebitCards { get; set; }
-        public int DebitCard { get; set; }
-
         public List<SelectListItem> BikeServices { get; set; }
         public int BikeService { get; set; }
 

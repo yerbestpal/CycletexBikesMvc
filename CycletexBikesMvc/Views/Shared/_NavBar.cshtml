@@ -24,6 +24,10 @@
                         <li class="nav-item nav-link">
                             @Html.ActionLink("Create a Booking", "Create", "Booking", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                         </li>
+
+                        <li class="nav-item nav-link">
+                            @Html.ActionLink("Manage Debit Cards", "Index", "DebitCard", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
+                        </li>
                     }
 
                     if (User.IsInRole("Admin"))

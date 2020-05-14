@@ -36,24 +36,28 @@ namespace CycletexBikesMvc.Models
             List<DebitCard> cards = new List<DebitCard>
             {
                 new DebitCard {
+                    CardHolderName = "Ross McLean",
                     CardNumber = "1111111111111111",
-                    CardExpiryDate = DateTime.Today.AddDays(365*2),
-                    CardSecurityNo = 123
+                    ExpiryDate = DateTime.Today.AddYears(2),
+                    CVV2 = 123
                 },
                 new DebitCard {
+                    CardHolderName = "Neil Hunter",
                     CardNumber = "2222222222222222",
-                    CardExpiryDate = DateTime.Today.AddDays(365),
-                    CardSecurityNo = 123
+                    ExpiryDate = DateTime.Today.AddYears(1),
+                    CVV2 = 123
                 },
                 new DebitCard {
+                    CardHolderName = "Daniel Cunningham",
                     CardNumber = "3333333333333333",
-                    CardExpiryDate = DateTime.Today.AddDays(2),
-                    CardSecurityNo = 123
+                    ExpiryDate = DateTime.Today.AddDays(2),
+                    CVV2 = 123
                 },
                 new DebitCard {
+                    CardHolderName = "Bob Cobb",
                     CardNumber = "4444444444444444",
-                    CardExpiryDate = DateTime.Today.AddDays(100),
-                    CardSecurityNo = 123
+                    ExpiryDate = DateTime.Today.AddDays(100),
+                    CVV2 = 123
                 }
             };
 
@@ -616,7 +620,6 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-16),
                 Total = 30,
                 BikeId = bike1.Id,
-                DebitCardId = cards[0].Id,
                 CustomerId = customer1.Id
             });
             bookings.Add(new Booking
@@ -626,7 +629,6 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-16),
                 Total = 250,
                 BikeId = bike2.Id,
-                DebitCardId = cards[1].Id,
                 CustomerId = customer2.Id
             });
             bookings.Add(new Booking
@@ -636,7 +638,6 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-160),
                 Total = 425,
                 BikeId = bike3.Id,
-                DebitCardId = cards[2].Id,
                 CustomerId = customer3.Id
             });
             bookings.Add(new Booking
@@ -646,7 +647,6 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-4),
                 Total = 25,
                 BikeId = bike4.Id,
-                DebitCardId = cards[3].Id,
                 CustomerId = customer4.Id
             });
             bookings.Add(new Booking
@@ -656,7 +656,6 @@ namespace CycletexBikesMvc.Models
                 CheckOutDate = placeholderDate.AddDays(-356),
                 Total = 37,
                 BikeId = bike5.Id,
-                DebitCardId = cards[3].Id,
                 CustomerId = customer4.Id
             });
 

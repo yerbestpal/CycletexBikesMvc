@@ -32,9 +32,5 @@ namespace CycletexBikesMvc.Models
 		[ForeignKey("Booking")]
 		public int BookingId { get; set; }
 		public Booking Booking { get; set; }
-
-		[ForeignKey("DebitCard")]
-		public int DebitCardId { get; set; }
-		public DebitCard DebitCard { get; set; }
 	}
 }

@@ -393,10 +393,10 @@
     <Content Include="Views\Booking\ViewAllCustomersBookings.cshtml" />
     <Content Include="Views\Booking\ViewAllBookings.cshtml" />
     <Content Include="Views\Booking\Details.cshtml" />
+    <Content Include="Views\DebitCard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\DebitCard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

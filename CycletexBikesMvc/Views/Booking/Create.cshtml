@@ -18,10 +18,8 @@
         <br />
         <hr />
         @Html.Partial("_Notifications")
-        <br />
+
         <div class="row">
-
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -45,27 +43,20 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DebitCard, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.DebitCard, Model.DebitCards, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DebitCards, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         @Html.LabelFor(model => model.BikeService, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.BikeService, Model.BikeServices, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => model.BikeService, Model.BikeServices, new { @class = "form-control", @id = "ddlObject" })
                             @Html.ValidationMessageFor(model => model.BikeServices, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Create" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
+
+                <p>Total: </p>
             }
         </div>
     </div>

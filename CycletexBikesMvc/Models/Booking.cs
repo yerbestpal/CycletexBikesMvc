@@ -40,10 +40,6 @@ namespace CycletexBikesMvc.Models
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        [ForeignKey("Payment")]
-        public int PaymentId { get; set; }
-        public DebitCard Payment { get; set; }
-
         [ForeignKey("Bike")]
         public int BikeId { get; set; }
         public Bike Bike { get; set; }
