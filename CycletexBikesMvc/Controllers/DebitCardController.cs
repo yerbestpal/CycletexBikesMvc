@@ -1,6 +1,9 @@
 ﻿// name: Ross McLean
 // date: 14/05/20
 
+using CycletexBikesMvc.Extensions;
+using CycletexBikesMvc.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,32 +12,53 @@ using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
 {
+    /// <summary>
+    /// DebitCardController class
+    /// Manages DebitCard functionality
+    /// </summary>
     public class DebitCardController : Controller
     {
+        /// <summary>
+        /// Instance of the database.
+        /// </summary>
+        private readonly ApplicationDbContext context = new ApplicationDbContext();
+
         // GET: DebitCard
-        public ActionResult Index()
+        /// <summary>
+        /// Get all DebitCards pertaining to an individual Customer
+        /// </summary>
+        /// <param name="id">Customer Id</param>
+        /// <returns>ViewAllCustomersCards view</returns>
+        [HttpGet]
+        public ActionResult ViewAllCustomersCards(string id)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (id is null)
+                        throw new ArgumentNullException(nameof(id));
 
+                    List<DebitCard> AllCustomersCardsInDb = context.DebitCards.Where(d => d.CustomerId == id).ToList();
+
+                    if (AllCustomersCardsInDb.Count() <= 0)
+                    {
+                        this.AddNotification("You have no cards", NotificationType.WARNING);
+                        return View(AllCustomersCardsInDb);
+                    }
+                    return View(AllCustomersCardsInDb);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error: " + ex.Message);
-                    throw;
+                    return RedirectToAction("Index", "Home");
                 }
             }
-        }
-
-        // GET: DebitCard/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: DebitCard/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();

@@ -1,4 +1,4 @@
-﻿// name: Ross McLean
+﻿    // name: Ross McLean
 // date: 12/05/20
 
 using CycletexBikesMvc.Extensions;
@@ -16,8 +16,8 @@ using System.Web.Mvc;
 namespace CycletexBikesMvc.Controllers
 {
     /// <summary>
-    /// BookingController class.
-    /// Manages Booking functionality.
+    /// BookingController class
+    /// Manages Booking functionality
     /// </summary>
     public class BookingController : Controller
     {
@@ -86,21 +86,33 @@ namespace CycletexBikesMvc.Controllers
         /// <summary>
         /// Gets all Bookings pertaining to an individual Customer
         /// </summary>
+        /// <param name="id">Customer Id</param>
         /// <returns>ViewAllCustomersBookings view</returns>
         public ActionResult ViewAllCustomersBookings(string id)
         {
-            if (id is null)
-                throw new ArgumentNullException(nameof(id));
-
-            List<Booking> AllCustomersBookingsInDb = context.Bookings.Where(b => b.CustomerId == id).ToList<Booking>();
-
-            if (AllCustomersBookingsInDb.Count() == 0)
+            if (ModelState.IsValid)
             {
-                this.AddNotification("You have made no bookings", NotificationType.WARNING);
-                return View(AllCustomersBookingsInDb);
-            }
+                try
+                {
+                    if (id is null)
+                        throw new ArgumentNullException(nameof(id));
 
-            return View(AllCustomersBookingsInDb);
+                    List<Booking> AllCustomersBookingsInDb = context.Bookings.Where(b => b.CustomerId == id).ToList();
+
+                    if (AllCustomersBookingsInDb.Count() <= 0)
+                    {
+                        this.AddNotification("You have made no bookings", NotificationType.WARNING);
+                        return View(AllCustomersBookingsInDb);
+                    }
+                    return View(AllCustomersBookingsInDb);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Booking/Create
