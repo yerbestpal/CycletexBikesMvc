@@ -1,23 +1,20 @@
 ﻿// name: Ross McLean
-// date: 13/05/20
+// date: 14/05/20
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace CycletexBikesMvc.Models
+namespace CycletexBikesMvc.ViewModels
 {
     /// <summary>
-    /// DebitCard class.
-    /// Facilitates payment of bookings when required.
+    /// CreateDebitCardViewModel class
+    /// Creates a view for the DebitCard Create action
     /// </summary>
-    public class DebitCard
+    public class CreateDebitCardViewModel
     {
-        [Key]
-        public int Id { get; set; }
 
         [Display(Name = "Card Holder Name")]
         public string CardHolderName { get; set; }
@@ -31,12 +28,5 @@ namespace CycletexBikesMvc.Models
         [Display(Name = "Expiry Date"),
          DisplayFormat(DataFormatString = "{0:mm-yy}")]
         public DateTime ExpiryDate { get; set; }
-
-        // Navigational Properties.
-        [ForeignKey("Customer")]
-        public string CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
-        public List<Payment> Payments { get; set; }
     }
 }

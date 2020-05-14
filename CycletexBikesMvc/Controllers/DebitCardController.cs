@@ -3,7 +3,9 @@
 
 using CycletexBikesMvc.Extensions;
 using CycletexBikesMvc.Models;
+using CycletexBikesMvc.ViewModels;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,9 +61,29 @@ namespace CycletexBikesMvc.Controllers
 
         // GET: DebitCard/Create
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
-            return View();
+            if (id is null)
+                throw new ArgumentNullException(nameof(id));
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    CreateDebitCardViewModel viewModel = new CreateDebitCardViewModel
+                    {
+                        CardHolderName = context.Users.Find(id).Name,
+                        ExpiryDate = DateTime.Now
+                    };
+                    return View(viewModel);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return RedirectToAction("ViewAllCustomersCards");
+                }
+            }
+            return RedirectToAction("ViewAllCustomersCards");
         }
 
         // POST: DebitCard/Create

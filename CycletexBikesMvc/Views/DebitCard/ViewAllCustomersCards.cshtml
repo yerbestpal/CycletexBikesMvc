@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CycletexBikesMvc.Models.DebitCard>
+﻿<!--name: Ross McLean-->
+<!--date: 14/05/20-->
+
+@model IEnumerable<CycletexBikesMvc.Models.DebitCard>
 
 @{
     ViewBag.Title = "Your Cards";
@@ -6,6 +9,9 @@
 
 <h2>Index</h2>
 
+<br />
+@Html.Partial("_Notifications")
+<hr />
 <p>
     @Html.ActionLink("Create New", "Create", "DebitCard")
 </p>
@@ -26,25 +32,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CardHolderName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CardNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CVV2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpiryDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardHolderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CVV2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpiryDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
