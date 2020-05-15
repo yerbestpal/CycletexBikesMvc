@@ -19,6 +19,7 @@ namespace CycletexBikesMvc.Controllers
     /// BookingController class
     /// Manages Booking functionality
     /// </summary>
+    [Authorize]
     public class BookingController : Controller
     {
         /// <summary>

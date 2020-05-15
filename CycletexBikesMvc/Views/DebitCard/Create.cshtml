@@ -2,61 +2,98 @@
 <!--date: 14/05/20-->
 
 @model CycletexBikesMvc.ViewModels.CreateDebitCardViewModel
+@{ViewBag.Title = "Create Debit Card";}
+@using Microsoft.AspNet.Identity;
+@section styles {@Styles.Render("~/Content/bootstrap-datetimepicker")}
 
-@{
-    ViewBag.Title = "Create Debit Card";
-}
+<br />
+<h1>Create Debit Card</h1>
+<br />
+<hr />
+@Html.Partial("_Notifications")
 
-<h2>Create</h2>
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+            <div class="form-horizontal">
 
-    <div class="form-horizontal">
-        <h4>CreateDebitCardViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CardHolderName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CardHolderName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CardHolderName, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CardHolderName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CardHolderName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CardHolderName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*Limit input with @maxlength*@
+                        @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", @maxlength = "16" } })
+                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CVV2, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*Limit input with @maxlength. Initially, this was an int, which turned out to be a pain for validation.*@
+                        @Html.EditorFor(model => model.CVV2, new { htmlAttributes = new { @class = "form-control", @maxlength = "3" } })
+                        @Html.ValidationMessageFor(model => model.CVV2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CVV2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CVV2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CVV2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
+</div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ViewAllCustomersCards", "DebitCard", new { id = User.Identity.GetUserId() })
 </div>
+
+<script>
+    // bootstrap-datetimepicker function
+    // Provides a functioning calendar and time picker
+    $(function () {
+        $('#ExpiryDate').datetimepicker(
+        {
+            format: 'MM-YY',
+            sideBySide: true,
+            showTodayButton: true,
+            // Using FontAwesome glyphs because Bootstrap glyphs are not included in the Bootstrap NuGet package
+            // Initially I was going to use the official CDN however it had an adverse effect on the greater UI
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-clock-o",
+                clear: "fa fa-trash-o"
+            }
+        });
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+}

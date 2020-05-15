@@ -39,25 +39,25 @@ namespace CycletexBikesMvc.Models
                     CardHolderName = "Ross McLean",
                     CardNumber = "1111111111111111",
                     ExpiryDate = DateTime.Today.AddYears(2),
-                    CVV2 = 123
+                    CVV2 = "375"
                 },
                 new DebitCard {
                     CardHolderName = "Neil Hunter",
                     CardNumber = "2222222222222222",
                     ExpiryDate = DateTime.Today.AddYears(1),
-                    CVV2 = 123
+                    CVV2 = "076"
                 },
                 new DebitCard {
                     CardHolderName = "Daniel Cunningham",
                     CardNumber = "3333333333333333",
                     ExpiryDate = DateTime.Today.AddDays(2),
-                    CVV2 = 123
+                    CVV2 = "997"
                 },
                 new DebitCard {
                     CardHolderName = "Bob Cobb",
                     CardNumber = "4444444444444444",
                     ExpiryDate = DateTime.Today.AddDays(100),
-                    CVV2 = 123
+                    CVV2 = "113"
                 }
             };
 

@@ -18,6 +18,7 @@ namespace CycletexBikesMvc.Controllers
     /// DebitCardController class
     /// Manages DebitCard functionality
     /// </summary>
+    [Authorize]
     public class DebitCardController : Controller
     {
         /// <summary>
@@ -73,7 +74,7 @@ namespace CycletexBikesMvc.Controllers
                     CreateDebitCardViewModel viewModel = new CreateDebitCardViewModel
                     {
                         CardHolderName = context.Users.Find(id).Name,
-                        ExpiryDate = DateTime.Now
+                        ExpiryDate = DateTime.Now.ToString()
                     };
                     return View(viewModel);
                 }
@@ -87,19 +88,52 @@ namespace CycletexBikesMvc.Controllers
         }
 
         // POST: DebitCard/Create
+        /// <summary>
+        /// Add DebitCard to database
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns>redirect to ViewAllCustomersCards action</returns>
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CreateDebitCardViewModel viewModel)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            string userId = User.Identity.GetUserId();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (userId == null)
+                return RedirectToAction("Login", "Account");
+
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    // Success path
+                    DebitCard card = new DebitCard
+                    {
+                        CardHolderName = viewModel.CardHolderName,
+                        CardNumber = viewModel.CardNumber,
+                        CVV2 = viewModel.CVV2,
+                        CustomerId = userId
+                    };
+
+                    string fourDigitYear = "20" + viewModel.ExpiryDate.Substring(3, 2);
+
+                    int year = int.Parse(fourDigitYear);
+                    int month = int.Parse(viewModel.ExpiryDate.Substring(0, 2));
+                    DateTime date = new DateTime(year, month, 1);
+                    card.ExpiryDate = date;
+
+                    context.DebitCards.Add(card);
+                    context.SaveChanges();
+                    this.AddNotification("Card Added", NotificationType.SUCCESS);
+                    return RedirectToAction("ViewAllCustomersCards", new { id = userId });
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    this.AddNotification("Error: could not add card", NotificationType.ERROR);
+                    return RedirectToAction("ViewAllCustomersCards", new { id = userId });
+                }
             }
+            return RedirectToAction("ViewAllCustomersCards", new { id = userId });
         }
 
         // GET: DebitCard/Edit/5

@@ -1,6 +1,8 @@
 ﻿<!--name: Ross McLean-->
 <!--date: 14/05/20-->
 
+@using Microsoft.AspNet.Identity;
+
 @model IEnumerable<CycletexBikesMvc.Models.DebitCard>
 
 @{
@@ -13,7 +15,7 @@
 @Html.Partial("_Notifications")
 <hr />
 <p>
-    @Html.ActionLink("Create New", "Create", "DebitCard")
+    @Html.ActionLink("Create New", "Create", "DebitCard", new { id = User.Identity.GetUserId() }, null)
 </p>
 <table class="table">
     <tr>
@@ -49,7 +51,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
             </td>
         </tr>
     }
