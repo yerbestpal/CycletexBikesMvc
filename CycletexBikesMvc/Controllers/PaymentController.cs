@@ -1,8 +1,10 @@
 ﻿// name: Ross McLean
 // date: 15/05/20
 
+using CycletexBikesMvc.Extensions;
 using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +53,7 @@ namespace CycletexBikesMvc.Controllers
                     MakePaymentViewModel viewModel = new MakePaymentViewModel
                     {
                         DebitCards = debitCardsSelectList,
+                        BookingId = booking.Id,
                         Total = booking.Total
                     };
 
@@ -67,21 +70,49 @@ namespace CycletexBikesMvc.Controllers
 
         // POST: Payment/MakePayment
         [HttpPost]
-        //public ActionResult MakePayment(MakePaymentViewModel viewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            return View();
-        //        }
-        //        catch (Exception)
-        //        {
+        [ValidateAntiForgeryToken]
+        public ActionResult MakePayment(MakePaymentViewModel viewModel)
+        {
+            if (viewModel is null)
+                throw new ArgumentNullException(nameof(viewModel));
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    DebitCard card = context.DebitCards.Find(viewModel.SelectedDebitCardId);
+                    Booking booking = context.Bookings.Find(viewModel.BookingId);
+                    if (card is null || booking is null)
+                    {
+                        this.AddNotification("Error: card cannot be found in database", NotificationType.ERROR);
+                        return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
+                    }
 
-        //            throw;
-        //        }
-        //    }
-        //}
+                    Payment payment = new Payment
+                    {
+                        Date = DateTime.Now,
+                        Total = booking.Total,
+                        IsSuccessful = true,
+                        BookingId = booking.Id
+                    };
+
+                    if (payment is null)
+                    {
+                        this.AddNotification("Error: could not accept payment", NotificationType.ERROR);
+                        return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
+                    }
+                    context.Bookings.Find(viewModel.BookingId).IsPaid = true;
+                    context.SaveChanges();
+                    return RedirectToAction("ViewAllCustomersBookings", "Booking", new { userId = User.Identity.GetUserId() });
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
+                }
+            }
+            return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
+        }
 
 
 

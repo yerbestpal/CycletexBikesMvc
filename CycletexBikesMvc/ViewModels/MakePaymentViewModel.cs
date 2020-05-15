@@ -29,6 +29,8 @@ namespace CycletexBikesMvc.ViewModels
 		// Stores the Id of the selected item
 		public int SelectedDebitCardId { get; set; }
 
+		public int BookingId { get; set; }
+
 		public decimal Total { get; set; }
 	}
 }

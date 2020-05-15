@@ -172,12 +172,12 @@ namespace CycletexBikesMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateBookingViewModel viewModel)        
         {
+            if (viewModel is null)
+                throw new ArgumentNullException(nameof(viewModel));
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Validation
-
                     int BikeId = viewModel.SelectedBikeId;
                     string userId = User.Identity.GetUserId();
 
@@ -188,7 +188,7 @@ namespace CycletexBikesMvc.Controllers
                     }
 
                     // This is unlikely to trigger but here as a precaution
-                    if (userId == null)
+                    if (userId is null)
                         return RedirectToAction("Login", "Account");
 
                     if (viewModel.Date < DateTime.Now)
@@ -234,7 +234,8 @@ namespace CycletexBikesMvc.Controllers
                         CheckOutDate = viewModel.Date.AddDays(3),
                         Total = 30,
                         BikeId = BikeId,
-                        CustomerId = User.Identity.GetUserId()
+                        CustomerId = User.Identity.GetUserId(),
+                        IsPaid = false
                     };
 
                     context.Bookings.Add(NewBooking);

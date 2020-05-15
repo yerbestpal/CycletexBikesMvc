@@ -24,6 +24,8 @@ namespace CycletexBikesMvc.Models
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
+        public bool IsPaid { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Check-in Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CheckInDate { get; set; }
