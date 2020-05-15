@@ -127,7 +127,6 @@ namespace CycletexBikesMvc.Controllers
             {
                 try
                 {
-                    //string userId = User.Identity.GetUserId();
                     List<Bike> bikes = context.Bikes.Where(b => b.CustomerId == id).ToList();
                     List<BikeService> services = context.BikeServices.ToList();
 

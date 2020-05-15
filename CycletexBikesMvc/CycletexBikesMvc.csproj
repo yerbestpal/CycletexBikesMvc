@@ -398,10 +398,10 @@
     <Content Include="Views\Booking\Details.cshtml" />
     <Content Include="Views\DebitCard\ViewAllCustomersCards.cshtml" />
     <Content Include="Views\DebitCard\Create.cshtml" />
+    <Content Include="Views\Payment\MakePayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
