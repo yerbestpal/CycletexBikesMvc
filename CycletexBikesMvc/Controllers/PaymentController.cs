@@ -5,6 +5,7 @@ using CycletexBikesMvc.Extensions;
 using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
 using Microsoft.AspNet.Identity;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,10 +143,16 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
         }
 
-
-
-
-
+        /// <summary>
+        /// PrintDetails()
+        /// Exports action to PDF view using Rotativa
+        /// </summary>
+        /// <returns>ActionAsPdf()</returns>
+        public ActionResult PrintPaymentDetails(int id)
+        {
+            var page = new ActionAsPdf("Details", new { id = id });
+            return page;
+        }
 
 
 

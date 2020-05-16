@@ -6,6 +6,7 @@ using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -252,59 +253,20 @@ namespace CycletexBikesMvc.Controllers
             return View();
         }
 
-        // The below code has been commented out as it is not used, and has been left in place as proof of understanding, or something.
 
-        /*
-
-        // GET: Booking/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult AllBookingsToPdf()
         {
-            return View();
-        }
-
-        // POST: Booking/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            // Must get cookies for session because ActionToPdf() creates a http request to load the page rather than printing the HTML directly.
+            Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
+            foreach (var key in Request.Cookies.AllKeys)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                cookieCollection.Add(key, Request.Cookies.Get(key).Value);
             }
-            catch
+            return new ActionAsPdf("ViewAllBookings")
             {
-                return View();
-            }
+                FileName = "AllBookings.pdf",
+                Cookies = cookieCollection
+            };
         }
-
-        // GET: Booking/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Booking/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Booking
-        public ActionResult Index()
-        {
-            return View();
-        }
-        */
     }
 }
