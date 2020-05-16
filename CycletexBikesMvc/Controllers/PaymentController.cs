@@ -92,7 +92,8 @@ namespace CycletexBikesMvc.Controllers
                         Date = DateTime.Now,
                         Total = booking.Total,
                         IsSuccessful = true,
-                        BookingId = booking.Id
+                        BookingId = booking.Id,
+                        Booking = booking
                     };
 
                     if (payment is null)
@@ -101,8 +102,9 @@ namespace CycletexBikesMvc.Controllers
                         return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
                     }
                     context.Bookings.Find(viewModel.BookingId).IsPaid = true;
+                    context.Payments.Add(payment);
                     context.SaveChanges();
-                    return RedirectToAction("ViewAllCustomersBookings", "Booking", new { userId = User.Identity.GetUserId() });
+                    return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
 
                 }
                 catch (Exception ex)
@@ -114,7 +116,30 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
         }
 
+        // GET: Payment/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (id is null)
+                        throw new ArgumentNullException(nameof(id));
+                    Payment payment = context.Payments.Find(id);
+                    if (payment is null)
+                        return RedirectToAction("ViewAllCustomersBookings", "Bookings", new { id = User.Identity.GetUserId() });
+                    return View(payment);
+                }
+                catch (Exception ex)
+                {
+                    // notification
+                    Console.WriteLine("Error: " + ex.Message);
+                    // redirect to ViewAllCustomersBookings()
+                }
+            }
 
+            return View();
+        }
 
 
 
@@ -129,12 +154,6 @@ namespace CycletexBikesMvc.Controllers
 
         // GET: Payment
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Payment/Details/5
-        public ActionResult Details(int id)
         {
             return View();
         }

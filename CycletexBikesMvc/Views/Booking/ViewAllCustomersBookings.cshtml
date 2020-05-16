@@ -1,5 +1,8 @@
 ﻿<!--name: Ross McLean-->
 <!--date: 15/05/20-->
+@using System.Linq;
+@using System.Data.Entity;
+@using CycletexBikesMvc.Models;
 
 @model IEnumerable<CycletexBikesMvc.Models.Booking>
 
@@ -43,32 +46,44 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsPaid)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.BikeId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CheckInDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CheckOutDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Total)
-    </td>
-    <td>
-        @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-        @Html.ActionLink("Pay Now", "MakePayment", "Payment", new { userId = User.Identity.GetUserId(), bookingId = item.Id }, null)
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BikeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckInDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOutDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @if (item.IsPaid == true)
+                {
+                    CycletexBikesMvc.Models.ApplicationDbContext context = new CycletexBikesMvc.Models.ApplicationDbContext();
+                    int bookingId = item.Id;
+                    int PaymentId = 0;
+                    foreach (Payment payment in context.Payments)
+                    {
+                        if (payment.BookingId == bookingId) { PaymentId = payment.Id; }
+                    }
+
+                    @Html.ActionLink("Payment Details", "Details", "Payment", new { id = PaymentId }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Pay Now", "MakePayment", "Payment", new { userId = User.Identity.GetUserId(), bookingId = item.Id }, null)
+                }
+            </td>
+        </tr>
     }
 
 </table>

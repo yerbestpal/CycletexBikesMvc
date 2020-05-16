@@ -17,11 +17,6 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class DebitCard
     {
-        // constructor
-        public DebitCard()
-        {
-        }
-
         [Key]
         public int Id { get; set; }
 
