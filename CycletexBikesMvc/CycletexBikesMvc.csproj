@@ -610,10 +610,10 @@
     <Content Include="Views\DebitCard\Create.cshtml" />
     <Content Include="Views\Payment\MakePayment.cshtml" />
     <Content Include="Views\Payment\Details.cshtml" />
+    <Content Include="Views\SMS\Send.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\SMS\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
