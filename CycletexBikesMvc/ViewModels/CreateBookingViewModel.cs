@@ -14,6 +14,11 @@ namespace CycletexBikesMvc.ViewModels
     /// </summary>
     public class CreateBookingViewModel
     {
+        public CreateBookingViewModel()
+        {
+            PhoneNumber = "+44";
+        }
+
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
@@ -28,5 +33,7 @@ namespace CycletexBikesMvc.ViewModels
         public int BikeService { get; set; }
 
         public bool IsPaid { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

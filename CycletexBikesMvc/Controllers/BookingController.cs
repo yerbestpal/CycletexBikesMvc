@@ -227,7 +227,7 @@ namespace CycletexBikesMvc.Controllers
                         }
                     }
 
-                    // Success path
+                    // Success
                     Booking NewBooking = new Booking()
                     {
                         Date = viewModel.Date,
@@ -241,6 +241,21 @@ namespace CycletexBikesMvc.Controllers
 
                     context.Bookings.Add(NewBooking);
                     context.SaveChanges();
+
+                    Bike bike = context.Bikes.Find(BikeId);
+
+                    // Twilio SMS notification
+                    if (NewBooking != null)
+                    {
+                        SMSController SmsController = new SMSController();
+                        SmsController.SendSms(
+                            "+447722509271",
+                            "Your " + bike.Brand.ToString() + " " + 
+                            bike.Model.ToString() + " is booked in for the date " +
+                            NewBooking.Date
+                        );
+                    }
+
                     this.AddNotification("Successfully Booked", NotificationType.SUCCESS);
                     return RedirectToAction("ViewAllCustomersBookings", new { id = userId });
                 }
