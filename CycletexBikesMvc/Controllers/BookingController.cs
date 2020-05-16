@@ -268,5 +268,25 @@ namespace CycletexBikesMvc.Controllers
                 Cookies = cookieCollection
             };
         }
+
+        /// <summary>
+        /// Sends an SMS message to the a Customer when they submit a booking
+        /// Uses Neximo library
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SendSmsBookingConfirmationToCustomer()
+        {
+            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "666d8adc",
+                ApiSecret = "yAx82JObEr4p1vww"
+            });
+            var results = client.SMS.Send(request: new SMS.SMSRequest
+            {
+                from = "Vonage APIs",
+                to = "447722509271",
+                text = "Hello from Vonage SMS API"
+            });
+        }
     }
 }
