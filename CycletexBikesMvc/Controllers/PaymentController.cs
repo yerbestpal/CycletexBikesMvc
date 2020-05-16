@@ -127,18 +127,19 @@ namespace CycletexBikesMvc.Controllers
                         throw new ArgumentNullException(nameof(id));
                     Payment payment = context.Payments.Find(id);
                     if (payment is null)
-                        return RedirectToAction("ViewAllCustomersBookings", "Bookings", new { id = User.Identity.GetUserId() });
+                        return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
+
+                    // Success
                     return View(payment);
                 }
                 catch (Exception ex)
                 {
-                    // notification
                     Console.WriteLine("Error: " + ex.Message);
-                    // redirect to ViewAllCustomersBookings()
+                    return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
                 }
             }
 
-            return View();
+            return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
         }
 
 
