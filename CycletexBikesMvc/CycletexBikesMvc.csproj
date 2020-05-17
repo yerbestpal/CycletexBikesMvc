@@ -191,6 +191,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -416,6 +417,7 @@
     <Content Include="Views\DebitCard\Create.cshtml" />
     <Content Include="Views\Payment\MakePayment.cshtml" />
     <Content Include="Views\Payment\Details.cshtml" />
+    <Content Include="Views\Service\ViewAllServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
