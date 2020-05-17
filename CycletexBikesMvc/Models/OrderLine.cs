@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,12 +12,12 @@ using System.Web.UI.WebControls.WebParts;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// OrderLine class.
-    /// Many to Many bridge class between Part and Order classes.
+    /// OrderLine class
+    /// Creates many to many relationship between Order and Part classes
     /// </summary>
     public class OrderLine
     {
-        // Navigational Properties.
+        // Navigational Properties
 
         [Key, ForeignKey("Order"), Column(Order = 0)]
         public int OrderId { get; set; }

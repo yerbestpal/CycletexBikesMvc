@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,8 +10,8 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Supplier class.
-    /// Suppliers fulfil Part Orders for CycleTex.
+    /// Supplier POCO class
+    /// Suppliers fulfil Part Orders
     /// </summary>
     public class Supplier
     {
@@ -19,7 +22,7 @@ namespace CycletexBikesMvc.Models
         public string ContactName { get; set; }
         public string Website { get; set; }
 
-        // Navigational Properties.
+        // Navigational Properties
 
         public List<Order> Orders { get; set; }
     }

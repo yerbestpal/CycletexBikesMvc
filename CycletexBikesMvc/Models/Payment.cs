@@ -11,7 +11,7 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
 	/// <summary>
-	/// Payment class
+	/// Payment POCO class
 	/// Facilitiates payment of Bookings via DebitCards
 	/// </summary>
 	public class Payment

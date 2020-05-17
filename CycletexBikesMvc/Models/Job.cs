@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +11,10 @@ using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
+    /// <summary>
+    /// Job POCO class
+    /// Jobs are supposed to be created and assigned to bookings
+    /// </summary>
     public class Job
     {
         [Key]

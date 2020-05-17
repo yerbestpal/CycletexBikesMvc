@@ -1,4 +1,10 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +14,8 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Order class.
-    /// Staff place Orders that are fulfilled by the Supplier.
+    /// Order POCO class
+    /// Staff would have placed Orders for Parts to be fulfilled by the Supplier
     /// </summary>
     public class Order
     {

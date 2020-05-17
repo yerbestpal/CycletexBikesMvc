@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,6 +10,10 @@ using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
+    /// <summary>
+    /// HoursWorked class
+    /// Creates many to many relationship between Job and Labour classes
+    /// </summary>
     public class HoursWorked
     {
         public int Quantity { get; set; }

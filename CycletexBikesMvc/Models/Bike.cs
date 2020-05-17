@@ -11,8 +11,8 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Bike class.
-    /// Represents Customers bikes used for bookings.
+    /// Bike POCO class
+    /// Represents Customers bikes used for bookings
     /// </summary>
     public class Bike
     {

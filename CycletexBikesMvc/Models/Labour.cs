@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,15 +11,15 @@ using System.Web.Services.Description;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Labour class.
-    /// Represents hours worked in a Job.
+    /// Labour POCO class
+    /// Represents hours worked in a Job
+    /// Labour would have represented the rate at which Technicians were paid
     /// </summary>
     public class Labour
     {
         [Key]
         public int Id { get; set; }
         public Decimal Cost { get; set; }
-        public BikeService BikeService { get; set; }
 
         // Navigation Properties
 

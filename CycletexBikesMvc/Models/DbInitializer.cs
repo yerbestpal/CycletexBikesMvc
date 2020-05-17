@@ -6,8 +6,8 @@
 //       using GetRange() to add lists of items to the database. Turns out I just couldn't see the first number
 //       because of the dark theme! At least it demonstrates different approaches.
 //
-// note2: In the future, I would not populate my lists for seeding with the objects immediately because it makes it
-//        impossible to debug them and is time consuming to refactor.
+// note2: In the future, I would not populate my lists for seeding with the objects immediately because it makes them
+//        difficult to debug and is time consuming to refactor.
 
 using System;
 using System.Collections.Generic;

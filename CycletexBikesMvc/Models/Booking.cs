@@ -12,8 +12,8 @@ using System.Web.Services.Description;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Booking class.
-    /// Books jobs to be performed on Customers bikes.
+    /// Booking POCO class
+    /// Books jobs to be performed on Customers bikes
     /// </summary>
     public class Booking
     {

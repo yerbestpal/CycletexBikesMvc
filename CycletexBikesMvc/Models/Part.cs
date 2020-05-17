@@ -1,4 +1,7 @@
-﻿using System;
+﻿// name: Ross McLean
+// date: 17/05/20
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,8 +10,8 @@ using System.Web;
 namespace CycletexBikesMvc.Models
 {
     /// <summary>
-    /// Part class.
-    /// Can be used by technicians to complete jobs.
+    /// Part POCO class
+    /// Would be used by technicians to complete Jobs when required
     /// </summary>
     public class Part
     {
@@ -35,7 +38,7 @@ namespace CycletexBikesMvc.Models
         [Required, Display(Name = "Quantity On Hand")]
         public int QuantityOnHand { get; set; }
 
-        // Navigational Properties.
+        // Navigational Properties
 
         public List<OrderLine> OrderLines { get; set; }
 

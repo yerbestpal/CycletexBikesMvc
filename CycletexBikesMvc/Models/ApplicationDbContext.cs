@@ -24,6 +24,8 @@ namespace CycletexBikesMvc.Models
         public DbSet<Part> Parts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<DebitCard> DebitCards { get; set; }
+
+        // These tables are the many to many bridge tables
         public DbSet<BikeService> BikeServices { get; set; }
         public DbSet<HoursWorked> HoursWorked { get; set; }
         public DbSet<JobParts> JobParts { get; set; }
