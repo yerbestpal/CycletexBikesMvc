@@ -20,6 +20,7 @@ namespace CycletexBikesMvc.ViewModels
         //    PhoneNumber = "+44";
         //}
 
+        [Required]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
@@ -28,9 +29,12 @@ namespace CycletexBikesMvc.ViewModels
         public List<SelectListItem> Bikes { get; set; }
 
         // Stores the Id of the selected item
+        [Required]
         public int SelectedBikeId { get; set; }
 
         public List<SelectListItem> BikeServices { get; set; }
+        
+        [Required]
         public int BikeService { get; set; }
 
         public bool IsPaid { get; set; }

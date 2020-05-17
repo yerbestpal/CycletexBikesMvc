@@ -11,7 +11,7 @@
 @Html.Partial("_Notifications")
 <hr />
 <p>
-    @Html.ActionLink("Create New", "Create", "Booking", new { id = User.Identity.GetUserId() })
+    @Html.ActionLink("Create New", "Create", "Booking", new { id = User.Identity.GetUserId() }, null)
 </p>
 <table class="table">
     <tr>
