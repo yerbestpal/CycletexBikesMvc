@@ -52,7 +52,7 @@ namespace CycletexBikesMvc.Controllers
                         debitCardsSelectList.Add(new SelectListItem()
                         {
                             Value = card.Id.ToString(),
-                            Text = debitCardController.MaskFirstTwelveCharacters(card.CardNumber)
+                            Text = debitCardController.MaskFirstTwelveCharacters(card.CardNumber)  // Masking card number
                         });
                     }
 

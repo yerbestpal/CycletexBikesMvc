@@ -15,7 +15,7 @@ namespace CycletexBikesMvc.Controllers
     public class SMSController : Controller
     {
         /// <summary>
-        /// Sends SMS to supplied phone numberz
+        /// Sends SMS to supplied phone numbers
         /// </summary>
         /// <param name="to">Customer phone number</param>
         /// <param name="body">SMS body content</param>
@@ -24,9 +24,9 @@ namespace CycletexBikesMvc.Controllers
         public void SendSms(string to, string body)
         {
             // This is compromising data, but I cannot use environment variables since
-            // the solution is not hosted, so, PLEASE, do not abuse it!
-            const string accountSid = "check notes for this";
-            const string authToken = "check notes for this";
+            // the solution is not hosted, so, please do not abuse it!
+            const string accountSid = "AC7cd74f215c1dfafabf10592d16f800e9";
+            const string authToken = "adebbba40d757e1a04bce0676210932d";
 
             TwilioClient.Init(accountSid, authToken);
 

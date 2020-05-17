@@ -1,4 +1,7 @@
-﻿@using Microsoft.AspNet.Identity
+﻿<!--name: Ross McLean-->
+<!--date: 17/05/20-->
+
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto small mb-2 mb-md-0" }))

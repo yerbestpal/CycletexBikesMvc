@@ -73,6 +73,7 @@ namespace CycletexBikesMvc.Controllers
         /// Gets all Bookings from the database
         /// </summary>
         /// <returns>ViewAllBookings view</returns>
+        [HttpGet]
         public ActionResult ViewAllBookings()
         {
             List<Booking> AllBookingsInDb = context.Bookings.ToList<Booking>();
@@ -92,6 +93,7 @@ namespace CycletexBikesMvc.Controllers
         /// </summary>
         /// <param name="id">Customer Id</param>
         /// <returns>ViewAllCustomersBookings view</returns>
+        [HttpGet]
         public ActionResult ViewAllCustomersBookings(string id)
         {
             if (ModelState.IsValid)
@@ -190,6 +192,11 @@ namespace CycletexBikesMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateBookingViewModel viewModel)
         {
+            string userId = User.Identity.GetUserId();
+
+            // This is unlikely to trigger but here as a precaution
+            if (userId is null)
+                return RedirectToAction("Login", "Account");
             if (viewModel is null)
                 throw new ArgumentNullException(nameof(viewModel));
             if (ModelState.IsValid)
@@ -197,17 +204,12 @@ namespace CycletexBikesMvc.Controllers
                 try
                 {
                     int BikeId = viewModel.SelectedBikeId;
-                    string userId = User.Identity.GetUserId();
 
                     if (BikeId == 0)
                     {
                         this.AddNotification("Database error: Cannot find bike in system", NotificationType.ERROR);
                         return View();
                     }
-
-                    // This is unlikely to trigger but here as a precaution
-                    if (userId is null)
-                        return RedirectToAction("Login", "Account");
 
                     if (viewModel.Date < DateTime.Now)
                     {
@@ -276,15 +278,14 @@ namespace CycletexBikesMvc.Controllers
                     this.AddNotification("Successfully Booked", NotificationType.SUCCESS);
                     return RedirectToAction("ViewAllCustomersBookings", new { id = userId });
                 }
-                // TODO: return correct data to view
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error: " + ex.Message);
-                    return View();
+                    this.AddNotification("Error: contact administrator", NotificationType.ERROR);
+                    return RedirectToAction("Create", new { id = userId });
                 }
             }
-            // TODO: return correct data to view
-            return View();
+            return RedirectToAction("Create", new { id = userId });
         }
 
         /// <summary>

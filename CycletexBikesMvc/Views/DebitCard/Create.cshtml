@@ -45,6 +45,9 @@
                     </div>
                 </div>
 
+                @* There is a bug with the datetimepicker - it does not conform to the defined views, (mm/yy). They are
+                    defined correctly, but I think there is something lost in translation between the picker and DateTime.
+                    It is possible to make set the date but it still creates a buggy experience for the user.*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
