@@ -41,8 +41,6 @@ namespace CycletexBikesMvc.ViewModels
 
         [Required]
         [StringLength(11, ErrorMessage = "The {0} must be {2} characters long.", MinimumLength = 11)]
-        [String]
-
         public string PhoneNumber { get; set; }
     }
 }
