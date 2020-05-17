@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
-using System.Linq;
-using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
@@ -36,6 +33,7 @@ namespace CycletexBikesMvc.Models
         // Navigational Properties.
         [ForeignKey("Customer")]
         public string CustomerId { get; set; }
+
         public Customer Customer { get; set; }
 
         public List<Payment> Payments { get; set; }

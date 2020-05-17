@@ -1,23 +1,15 @@
 ﻿<!--name: Ross McLean-->
 <!--date: 15/05/20-->
-@using System.Linq;
-@using System.Data.Entity;
 @using CycletexBikesMvc.Models;
-
-@model IEnumerable<CycletexBikesMvc.Models.Booking>
-
-@{
-    ViewBag.Title = "Your Bookings";
-}
-
 @using Microsoft.AspNet.Identity;
 
-<h2>Your Bookings</h2>
+@model IEnumerable<CycletexBikesMvc.Models.Booking>
+@{ViewBag.Title = "Your Bookings";}
 
+<h2>Your Bookings</h2>
 <br />
 @Html.Partial("_Notifications")
 <hr />
-
 <p>
     @Html.ActionLink("Create New", "Create", "Booking")
 </p>
@@ -85,5 +77,4 @@
             </td>
         </tr>
     }
-
 </table>

@@ -4,9 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
@@ -19,6 +16,7 @@ namespace CycletexBikesMvc.Models
     {
         [Key]
         public int Id { get; set; }
+
         public Decimal Cost { get; set; }
 
         // Navigation Properties

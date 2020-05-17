@@ -9,14 +9,12 @@
 // note2: In the future, I would not populate my lists for seeding with the objects immediately because it makes them
 //        difficult to debug and is time consuming to refactor.
 
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
-using System.Web;
-using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
@@ -110,26 +108,28 @@ namespace CycletexBikesMvc.Models
             Customer customer3 = null;
             Customer customer4 = null;
 
-
             // Seed Users
             if (!context.Users.Any())
             {
                 // Create roles.
+
                 #region CreateRoles
+
                 RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-                if (!roleManager.RoleExists("Admin")) 
+                if (!roleManager.RoleExists("Admin"))
                     roleManager.Create(new IdentityRole("Admin"));
-                if (!roleManager.RoleExists("Workshop Manager")) 
+                if (!roleManager.RoleExists("Workshop Manager"))
                     roleManager.Create(new IdentityRole("Workshop Manager"));
-                if (!roleManager.RoleExists("Stock Manager")) 
+                if (!roleManager.RoleExists("Stock Manager"))
                     roleManager.Create(new IdentityRole("Stock Manager"));
-                if (!roleManager.RoleExists("Floor Staff")) 
+                if (!roleManager.RoleExists("Floor Staff"))
                     roleManager.Create(new IdentityRole("Floor Staff"));
-                if (!roleManager.RoleExists("Technician")) 
+                if (!roleManager.RoleExists("Technician"))
                     roleManager.Create(new IdentityRole("Technician"));
-                if (!roleManager.RoleExists("Customer")) 
+                if (!roleManager.RoleExists("Customer"))
                     roleManager.Create(new IdentityRole("Customer"));
-                #endregion
+
+                #endregion CreateRoles
 
                 context.SaveChanges();
 
@@ -397,8 +397,6 @@ namespace CycletexBikesMvc.Models
             if (!context.DebitCards.Any())
                 context.DebitCards.AddRange(cards);
 
-            
-
             context.SaveChanges();
 
             // Create Services
@@ -579,13 +577,12 @@ namespace CycletexBikesMvc.Models
                     Name = "Rear Can Service - Basic",
                     Cost = 25
                 },
-
             };
 
             // Seed Services
             if (!context.BikeServices.Any())
                 context.BikeServices.AddRange(services);
-            
+
             context.SaveChanges();
 
             // Create Bookings

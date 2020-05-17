@@ -4,14 +4,12 @@
 using CycletexBikesMvc.Extensions;
 using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
@@ -45,7 +43,7 @@ namespace CycletexBikesMvc.Controllers
                 {
                     if (LoggedInUserId == null)
                         return RedirectToAction("Login", "Account");
-                    if (id == null) 
+                    if (id == null)
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     Booking booking = context.Bookings.Find(id);
                     if (booking == null)
@@ -156,7 +154,8 @@ namespace CycletexBikesMvc.Controllers
                     List<SelectListItem> servicesSelectList = new List<SelectListItem>();
                     foreach (BikeService service in services)
                     {
-                        servicesSelectList.Add(new SelectListItem() { 
+                        servicesSelectList.Add(new SelectListItem()
+                        {
                             Value = service.Id.ToString(),
                             Text = service.Name
                         });
@@ -189,7 +188,7 @@ namespace CycletexBikesMvc.Controllers
         // POST: Booking/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateBookingViewModel viewModel)        
+        public ActionResult Create(CreateBookingViewModel viewModel)
         {
             if (viewModel is null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -268,7 +267,7 @@ namespace CycletexBikesMvc.Controllers
                         SMSController SmsController = new SMSController();
                         SmsController.SendSms(
                             "+447722509271",
-                            "Your " + bike.Brand.ToString() + " " + 
+                            "Your " + bike.Brand.ToString() + " " +
                             bike.Model.ToString() + " is booked in for the date " +
                             NewBooking.Date
                         );
@@ -278,7 +277,7 @@ namespace CycletexBikesMvc.Controllers
                     return RedirectToAction("ViewAllCustomersBookings", new { id = userId });
                 }
                 // TODO: return correct data to view
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine("Error: " + ex.Message);
                     return View();

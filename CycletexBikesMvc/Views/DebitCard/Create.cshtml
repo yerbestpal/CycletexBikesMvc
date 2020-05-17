@@ -11,7 +11,6 @@
 <br />
 <hr />
 @Html.Partial("_Notifications")
-
 <div class="container">
     <div class="row">
         @using (Html.BeginForm())
@@ -63,11 +62,9 @@
         }
     </div>
 </div>
-
 <div>
     @Html.ActionLink("Back to List", "ViewAllCustomersCards", "DebitCard", new { id = User.Identity.GetUserId() })
 </div>
-
 <script>
     // bootstrap-datetimepicker function
     // Provides a functioning calendar and time picker
@@ -92,7 +89,4 @@
         });
     });
 </script>
-
-@section scripts {
-    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
-}
+@section scripts {@Scripts.Render("~/bundles/bootstrap-datetimepicker")}

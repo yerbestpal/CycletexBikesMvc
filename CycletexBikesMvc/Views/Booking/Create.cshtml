@@ -2,14 +2,8 @@
 <!--date: 12/05/20-->
 
 @model CycletexBikesMvc.ViewModels.CreateBookingViewModel
-
-@{
-    ViewBag.Title = "Create Booking";
-}
-
-@section styles {
-    @Styles.Render("~/Content/bootstrap-datetimepicker")
-}
+@{ViewBag.Title = "Create Booking";}
+@section styles {@Styles.Render("~/Content/bootstrap-datetimepicker")}
 
 <section class="">
     <div class="container">
@@ -96,7 +90,4 @@
         });
     });
 </script>
-
-@section scripts {
-    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
-}
+@section scripts {@Scripts.Render("~/bundles/bootstrap-datetimepicker")}

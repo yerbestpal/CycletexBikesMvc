@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
@@ -27,13 +24,11 @@ namespace CycletexBikesMvc.Models
 
         // These tables are the many to many bridge tables
         public DbSet<BikeService> BikeServices { get; set; }
+
         public DbSet<HoursWorked> HoursWorked { get; set; }
         public DbSet<JobParts> JobParts { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public List<JobServices> JobServices { get; set; }
-
-
-
 
         /// <summary>
         /// Constructor.

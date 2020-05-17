@@ -386,7 +386,6 @@
     }
     formatTokenFunctions.DDDD = padToken(formatTokenFunctions.DDD, 3);
 
-
     function meridiemFixWrap(locale, hour, meridiem) {
         var isPm;
 
@@ -474,7 +473,6 @@
     /************************************
         Helpers
     ************************************/
-
 
     function extend(a, b) {
         for (var i in b) {
@@ -857,9 +855,7 @@
         Locale
     ************************************/
 
-
     extend(Locale.prototype, {
-
         set : function (config) {
             var prop, i;
             for (i in config) {
@@ -986,7 +982,6 @@
             }
         },
 
-
         _calendar : {
             sameDay : '[Today at] LT',
             nextDay : '[Tomorrow at] LT',
@@ -1069,7 +1064,6 @@
         Formatting
     ************************************/
 
-
     function removeFormattingTokens(input) {
         if (input.match(/\[[\s\S]/)) {
             return input.replace(/^\[|\]$/g, '');
@@ -1129,11 +1123,9 @@
         return format;
     }
 
-
     /************************************
         Parsing
     ************************************/
-
 
     // get the regex to find the next token
     function getParseRegexForToken(token, config) {
@@ -1749,7 +1741,6 @@
         Relative Time
     ************************************/
 
-
     // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
     function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
         return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
@@ -1781,11 +1772,9 @@
         return substituteTimeAgo.apply({}, args);
     }
 
-
     /************************************
         Week of Year
     ************************************/
-
 
     // firstDayOfWeek       0 = sun, 6 = sat
     //                      the day of the week that starts the week
@@ -1798,7 +1787,6 @@
         var end = firstDayOfWeekOfYear - firstDayOfWeek,
             daysToDayOfWeek = firstDayOfWeekOfYear - mom.day(),
             adjustedMoment;
-
 
         if (daysToDayOfWeek > end) {
             daysToDayOfWeek -= 7;
@@ -2190,9 +2178,7 @@
         Moment Prototype
     ************************************/
 
-
     extend(moment.fn = Moment.prototype, {
-
         clone : function () {
             return moment(this);
         },
@@ -2678,7 +2664,6 @@
             // https://github.com/moment/moment/pull/1871
             return -Math.round(this._d.getTimezoneOffset() / 15) * 15;
         }
-
     });
 
     function rawMonthSetter(mom, value) {
@@ -2754,7 +2739,6 @@
         Duration Prototype
     ************************************/
 
-
     function daysToYears (days) {
         // 400 years have 146097 days (taking into account leap year rules)
         return days * 400 / 146097;
@@ -2767,7 +2751,6 @@
     }
 
     extend(moment.duration.fn = Duration.prototype, {
-
         _bubble : function () {
             var milliseconds = this._milliseconds,
                 days = this._days,
@@ -2986,7 +2969,6 @@
     /************************************
         Default Locale
     ************************************/
-
 
     // Set default locale, other locale will inherit from English.
     moment.locale('en', {

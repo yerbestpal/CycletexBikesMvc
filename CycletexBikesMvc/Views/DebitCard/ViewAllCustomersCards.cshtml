@@ -4,13 +4,8 @@
 @using Microsoft.AspNet.Identity;
 
 @model IEnumerable<CycletexBikesMvc.Models.DebitCard>
-
-@{
-    ViewBag.Title = "Your Cards";
-}
-
+@{ViewBag.Title = "Your Cards";}
 <h2>Index</h2>
-
 <br />
 @Html.Partial("_Notifications")
 <hr />
@@ -51,9 +46,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
-
 </table>

@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(CycletexBikesMvc.Startup))]
+
 namespace CycletexBikesMvc
 {
     public partial class Startup

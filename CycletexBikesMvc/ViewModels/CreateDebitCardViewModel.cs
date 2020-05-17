@@ -1,11 +1,7 @@
 ﻿// name: Ross McLean
 // date: 14/05/20
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CycletexBikesMvc.ViewModels
 {
@@ -15,7 +11,6 @@ namespace CycletexBikesMvc.ViewModels
     /// </summary>
     public class CreateDebitCardViewModel
     {
-
         [Display(Name = "Card Holder Name")]
         public string CardHolderName { get; set; }
 

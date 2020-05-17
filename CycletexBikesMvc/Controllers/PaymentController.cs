@@ -9,7 +9,6 @@ using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
@@ -50,8 +49,8 @@ namespace CycletexBikesMvc.Controllers
 
                     foreach (DebitCard card in debitCards)
                     {
-                        debitCardsSelectList.Add(new SelectListItem() 
-                        { 
+                        debitCardsSelectList.Add(new SelectListItem()
+                        {
                             Value = card.Id.ToString(),
                             Text = debitCardController.MaskFirstTwelveCharacters(card.CardNumber)
                         });
@@ -69,7 +68,7 @@ namespace CycletexBikesMvc.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " +ex.Message);
+                    Console.WriteLine("Error: " + ex.Message);
                     return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = userId });
                 }
             }
@@ -121,7 +120,6 @@ namespace CycletexBikesMvc.Controllers
                     context.Payments.Add(payment);
                     context.SaveChanges();
                     return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = User.Identity.GetUserId() });
-
                 }
                 catch (Exception ex)
                 {
@@ -172,7 +170,6 @@ namespace CycletexBikesMvc.Controllers
             var page = new ActionAsPdf("Details", new { id = id });
             return page;
         }
-
 
         // Unused generated CRUD methods below======================================
 

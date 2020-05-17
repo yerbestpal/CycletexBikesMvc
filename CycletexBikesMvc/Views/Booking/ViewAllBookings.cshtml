@@ -2,21 +2,15 @@
 <!--date: 12/05/20-->
 
 @model IEnumerable<CycletexBikesMvc.Models.Booking>
-
-@{
-    ViewBag.Title = "ViewAllBookings";
-}
+@{ViewBag.Title = "ViewAllBookings";}
 
 <h2>ViewAllBookings</h2>
-
 <br />
 @Html.Partial("_Notifications")
 <hr />
-
 <p>
     @Html.ActionLink("Print", "AllBookingsToPdf")
 </p>
-
 <table class="table">
     <tr>
         <th>
@@ -73,5 +67,4 @@
             </td>
         </tr>
     }
-
 </table>

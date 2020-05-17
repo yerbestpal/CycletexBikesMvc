@@ -1,11 +1,8 @@
 ﻿// name: Ross McLean
 // date: 17/05/20
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CycletexBikesMvc.Models
 {
@@ -20,6 +17,7 @@ namespace CycletexBikesMvc.Models
 
         [Display(Name = "Contact Name")]
         public string ContactName { get; set; }
+
         public string Website { get; set; }
 
         // Navigational Properties

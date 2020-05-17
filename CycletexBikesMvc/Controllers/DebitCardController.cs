@@ -4,12 +4,10 @@
 using CycletexBikesMvc.Extensions;
 using CycletexBikesMvc.Models;
 using CycletexBikesMvc.ViewModels;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
@@ -139,7 +137,7 @@ namespace CycletexBikesMvc.Controllers
                     this.AddNotification("Card Added", NotificationType.SUCCESS);
                     return RedirectToAction("ViewAllCustomersCards", new { id = userId });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine("Error: " + ex.Message);
                     this.AddNotification("Error: could not add card", NotificationType.ERROR);

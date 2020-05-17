@@ -2,12 +2,7 @@
 // date: 17/05/20
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using System.Web.Services.Description;
 
 namespace CycletexBikesMvc.Models
 {
@@ -25,6 +20,7 @@ namespace CycletexBikesMvc.Models
 
         [Display(Name = "Repair Description")]
         public string RepairDescription { get; set; }
+
         public string Note { get; set; }
 
         [Display(Name = "Start Time"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
@@ -32,6 +28,7 @@ namespace CycletexBikesMvc.Models
 
         [Display(Name = "Completion Time"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}")]
         public DateTime CompletionTime { get; set; }
+
         public string Status { get; set; }
 
         // Nav properties are commented out because they interfere with seeding and this class is actually unused.

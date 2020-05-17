@@ -1,10 +1,6 @@
 ﻿// name: Ross McLean
 // date: 16/05/20
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
