@@ -264,11 +264,16 @@ namespace CycletexBikesMvc.Controllers
                     Bike bike = context.Bikes.Find(BikeId);
 
                     // Twilio SMS notification
+                    // This will not work with any number input in the view, because
+                    // I am using a Twilio trial account for this implementation.
+                    // Otherwise, I would have to pay for a digital phone number.
+                    // I will include screenshots of it working with my number, but with
+                    // the project submission and my evaluation.
                     if (NewBooking != null)
                     {
                         SMSController SmsController = new SMSController();
                         SmsController.SendSms(
-                            "+447722509271",
+                            viewModel.PhoneNumber.ToString(),
                             "Your " + bike.Brand.ToString() + " " +
                             bike.Model.ToString() + " is booked in for the date " +
                             NewBooking.Date
@@ -294,7 +299,8 @@ namespace CycletexBikesMvc.Controllers
         /// <returns>ActionAsPdf()</returns>
         public ActionResult AllBookingsToPdf()
         {
-            // Must get cookies for session because ActionToPdf() creates a http request to load the page rather than printing the HTML directly.
+            // Must get cookies for session because ActionToPdf() creates a http request to 
+            // load the page rather than printing the HTML directly.
             Dictionary<string, string> cookieCollection = new Dictionary<string, string>();
             foreach (var key in Request.Cookies.AllKeys)
             {

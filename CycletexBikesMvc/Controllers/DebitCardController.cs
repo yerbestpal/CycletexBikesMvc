@@ -123,7 +123,11 @@ namespace CycletexBikesMvc.Controllers
                         CustomerId = userId
                     };
 
-                    // TODO - add card validation (is null?)
+                    if (card is null)
+                    {
+                        this.AddNotification("Error: card is null", NotificationType.ERROR);
+                        return RedirectToAction("ViewAllCustomersCards", new { id = userId });
+                    }
 
                     string fourDigitYear = "20" + viewModel.ExpiryDate.Substring(3, 2);
 
