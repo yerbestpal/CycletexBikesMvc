@@ -1,4 +1,4 @@
-﻿    // name: Ross McLean
+﻿// name: Ross McLean
 // date: 12/05/20
 
 using CycletexBikesMvc.Extensions;
@@ -30,9 +30,10 @@ namespace CycletexBikesMvc.Controllers
 
         // GET: Booking/Details/5
         /// <summary>
-        /// Returns view showing various details from individual bookings
+        /// Returns Booking Details view
+        /// View displays a Bookings particular information
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Booking id</param>
         /// <returns>Details view</returns>
         public ActionResult Details(int? id)
         {
@@ -49,6 +50,8 @@ namespace CycletexBikesMvc.Controllers
                     Booking booking = context.Bookings.Find(id);
                     if (booking == null)
                         return HttpNotFound();
+
+                    // Success
                     return View(booking);
                 }
                 catch (Exception ex)
@@ -82,6 +85,7 @@ namespace CycletexBikesMvc.Controllers
                 return View(AllBookingsInDb);
             }
 
+            // Success
             return View(AllBookingsInDb);
         }
 
@@ -106,6 +110,8 @@ namespace CycletexBikesMvc.Controllers
                         this.AddNotification("You have made no bookings", NotificationType.WARNING);
                         return View(AllCustomersBookingsInDb);
                     }
+
+                    // Success
                     return View(AllCustomersBookingsInDb);
                 }
                 catch (Exception ex)
@@ -117,6 +123,12 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Creates selectLists from lists and sends those, and appropriate
+        /// data to a new view model
+        /// </summary>
+        /// <param name="id">Customer id</param>
+        /// <returns>CreateBookingViewModel</returns>
         // GET: Booking/Create
         [HttpGet]
         public ActionResult Create(string id)
@@ -168,6 +180,12 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Creates new booking from view model data and saves it to the database
+        /// Sends SMS message to the Customer including information about their booking
+        /// </summary>
+        /// <param name="viewModel">CreateBookingViewModel</param>
+        /// <returns>redirect to ViewAllCustomersBookings action</returns>
         // POST: Booking/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -259,16 +277,21 @@ namespace CycletexBikesMvc.Controllers
                     this.AddNotification("Successfully Booked", NotificationType.SUCCESS);
                     return RedirectToAction("ViewAllCustomersBookings", new { id = userId });
                 }
+                // TODO: return correct data to view
                 catch(Exception ex)
                 {
                     Console.WriteLine("Error: " + ex.Message);
                     return View();
                 }
             }
+            // TODO: return correct data to view
             return View();
         }
 
-
+        /// <summary>
+        /// Builds a PDF of all bookings in the system
+        /// </summary>
+        /// <returns>ActionAsPdf()</returns>
         public ActionResult AllBookingsToPdf()
         {
             // Must get cookies for session because ActionToPdf() creates a http request to load the page rather than printing the HTML directly.

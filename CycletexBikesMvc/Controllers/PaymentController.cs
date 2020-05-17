@@ -25,6 +25,12 @@ namespace CycletexBikesMvc.Controllers
         /// </summary>
         private readonly ApplicationDbContext context = new ApplicationDbContext();
 
+        /// <summary>
+        /// Creates the MakePayment view by building a view model and populating it with required data
+        /// </summary>
+        /// <param name="userId">Customer id</param>
+        /// <param name="bookingId">Booking id</param>
+        /// <returns>MakePaymentViewModel</returns>
         // GET: Payment/MakePayment
         [HttpGet]
         public ActionResult MakePayment(string userId, int bookingId)
@@ -58,17 +64,24 @@ namespace CycletexBikesMvc.Controllers
                         Total = booking.Total
                     };
 
+                    // Success
                     return View(viewModel);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error: " +ex.Message);
-                    return RedirectToAction("", "", new { id = userId });
+                    return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = userId });
                 }
             }
-            return RedirectToAction("", "", new { id = userId });
+            return RedirectToAction("ViewAllCustomersBookings", "Booking", new { id = userId });
         }
 
+        /// <summary>
+        /// Creates new Payment and adds it to the database
+        /// Marks the Booking as paid
+        /// </summary>
+        /// <param name="viewModel">MakePaymentViewModel</param>
+        /// <returns>Redirect to ViewAllCustomersBookings action</returns>
         // POST: Payment/MakePayment
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,6 +115,8 @@ namespace CycletexBikesMvc.Controllers
                         this.AddNotification("Error: could not accept payment", NotificationType.ERROR);
                         return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
                     }
+
+                    // Success
                     context.Bookings.Find(viewModel.BookingId).IsPaid = true;
                     context.Payments.Add(payment);
                     context.SaveChanges();
@@ -117,6 +132,11 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("MakePayment", new { userId = User.Identity.GetUserId(), bookingId = viewModel.BookingId });
         }
 
+        /// <summary>
+        /// Gets the Booking Details view
+        /// </summary>
+        /// <param name="id">Booking id</param>
+        /// <returns></returns>
         // GET: Payment/Details/5
         public ActionResult Details(int? id)
         {
@@ -144,7 +164,6 @@ namespace CycletexBikesMvc.Controllers
         }
 
         /// <summary>
-        /// PrintDetails()
         /// Exports action to PDF view using Rotativa
         /// </summary>
         /// <returns>ActionAsPdf()</returns>
@@ -155,81 +174,78 @@ namespace CycletexBikesMvc.Controllers
         }
 
 
+        // Unused generated CRUD methods below======================================
 
+        //// GET: Payment
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
+        //// GET: Payment/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
+        //// POST: Payment/Create
+        //[HttpPost]
+        //public ActionResult Create(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
 
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        // GET: Payment
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //// GET: Payment/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-        // GET: Payment/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// POST: Payment/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-        // POST: Payment/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// GET: Payment/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // GET: Payment/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// POST: Payment/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-        // POST: Payment/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Payment/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Payment/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

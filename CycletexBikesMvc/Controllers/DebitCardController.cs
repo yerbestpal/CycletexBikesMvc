@@ -28,9 +28,9 @@ namespace CycletexBikesMvc.Controllers
 
         // GET: DebitCard
         /// <summary>
-        /// Get all DebitCards pertaining to an individual Customer
+        /// Gets all DebitCards pertaining to an individual Customer
         /// </summary>
-        /// <param name="id">Customer Id</param>
+        /// <param name="id">Customer id</param>
         /// <returns>ViewAllCustomersCards view</returns>
         [HttpGet]
         public ActionResult ViewAllCustomersCards(string id)
@@ -49,6 +49,8 @@ namespace CycletexBikesMvc.Controllers
                         this.AddNotification("You have no cards", NotificationType.WARNING);
                         return View(AllCustomersCardsInDb);
                     }
+
+                    // Success
                     return View(AllCustomersCardsInDb);
                 }
                 catch (Exception ex)
@@ -60,6 +62,12 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Creates new CreateDebitCardViewModel, assign default values
+        /// and send to view
+        /// </summary>
+        /// <param name="id">Customer</param>
+        /// <returns>Redirect to ViewAllCustomersCards action</returns>
         // GET: DebitCard/Create
         [HttpGet]
         public ActionResult Create(string id)
@@ -76,6 +84,8 @@ namespace CycletexBikesMvc.Controllers
                         CardHolderName = context.Users.Find(id).Name,
                         ExpiryDate = DateTime.Now.ToString()
                     };
+
+                    // Success
                     return View(viewModel);
                 }
                 catch (Exception ex)
@@ -87,25 +97,26 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("ViewAllCustomersCards");
         }
 
-        // POST: DebitCard/Create
         /// <summary>
-        /// Add DebitCard to database
+        /// Create new DebitCard with values from viewModel and
+        /// add to database
         /// </summary>
-        /// <param name="collection"></param>
+        /// <param name="viewModel">CreateDebitCardViewModel</param>
         /// <returns>redirect to ViewAllCustomersCards action</returns>
+        // POST: DebitCard/Create
         [HttpPost]
         public ActionResult Create(CreateDebitCardViewModel viewModel)
         {
             string userId = User.Identity.GetUserId();
 
-            if (userId == null)
+            if (userId is null)
                 return RedirectToAction("Login", "Account");
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Success path
+                    // Success
                     DebitCard card = new DebitCard
                     {
                         CardHolderName = viewModel.CardHolderName,
@@ -113,6 +124,8 @@ namespace CycletexBikesMvc.Controllers
                         CVV2 = viewModel.CVV2,
                         CustomerId = userId
                     };
+
+                    // TODO - add card validation (is null?)
 
                     string fourDigitYear = "20" + viewModel.ExpiryDate.Substring(3, 2);
 
@@ -136,59 +149,14 @@ namespace CycletexBikesMvc.Controllers
             return RedirectToAction("ViewAllCustomersCards", new { id = userId });
         }
 
-        // GET: DebitCard/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DebitCard/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DebitCard/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DebitCard/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         /// <summary>
-        /// MaskFirstTwelveCharacters method
         /// Masks the first twelve characters of a debit card number
         /// </summary>
         /// <param name="cardNumber">16-digit debit card number</param>
-        /// <returns>16-char string</returns>
+        /// <returns>16-char masked string</returns>
         // Unsure if ValidateAntiForgeryToken belongs here. I am placing it just in case,
         // since the method is called from a POST action after a form is sent
-        [ValidateAntiForgeryToken]  
+        [ValidateAntiForgeryToken]
         public string MaskFirstTwelveCharacters(string cardNumber)
         {
             if (string.IsNullOrEmpty(cardNumber))
@@ -200,5 +168,51 @@ namespace CycletexBikesMvc.Controllers
             string MaskedCardNo = oldCardNo.Replace(oldCardNo, "**** **** **** " + oldCardNo.Substring(11, 4));
             return MaskedCardNo;
         }
+
+        // Unused generated CRUD methods below======================================
+
+        //// GET: DebitCard/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: DebitCard/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //// GET: DebitCard/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: DebitCard/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
