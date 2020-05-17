@@ -1,6 +1,8 @@
 ﻿<!--name: Ross McLean-->
 <!--date: 17/05/20-->
 
+@using Microsoft.AspNet.Identity;
+
 @model CycletexBikesMvc.Models.Booking
 @{ViewBag.Title = "Details";}
 
@@ -57,7 +59,5 @@
             @Html.DisplayFor(model => model.Total)
         </dd>
     </dl>
+    @Html.ActionLink("Back to List", "ViewAllBookings");
 </div>
-<p>
-    @Html.ActionLink("Back to List", "ViewAllCustomersBookings")
-</p>
