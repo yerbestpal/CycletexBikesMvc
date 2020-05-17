@@ -9,7 +9,7 @@
 @Html.Partial("_Notifications")
 <hr />
 <p>
-    @Html.ActionLink("Print", "AllBookingsToPdf")
+    @Html.ActionLink("Print All", "AllBookingsToPdf", "Booking")
 </p>
 <table class="table">
     <tr>
@@ -62,8 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Total)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
         </tr>
     }

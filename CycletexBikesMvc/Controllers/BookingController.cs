@@ -77,7 +77,7 @@ namespace CycletexBikesMvc.Controllers
         [HttpGet]
         public ActionResult ViewAllBookings()
         {
-            List<Booking> AllBookingsInDb = context.Bookings.ToList<Booking>();
+            List<Booking> AllBookingsInDb = context.Bookings.ToList();
 
             if (AllBookingsInDb.Count() == 0)
             {
