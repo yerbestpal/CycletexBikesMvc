@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item nav-link">
-                    @Html.ActionLink("Services", "Index", "Service", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Our Services", "ViewAllServices", "Service", null, new { @class = "nav-link" })
                 </li>
                 @if (User.Identity.IsAuthenticated)
                 {

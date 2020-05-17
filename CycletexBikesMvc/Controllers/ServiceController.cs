@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycletexBikesMvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,11 +7,25 @@ using System.Web.Mvc;
 
 namespace CycletexBikesMvc.Controllers
 {
+    /// <summary>
+    /// ServiceController
+    /// Manage BikeService functionality
+    /// </summary>
     public class ServiceController : Controller
     {
+        /// <summary>
+        /// Instance of the database.
+        /// </summary>
+        private readonly ApplicationDbContext context = new ApplicationDbContext();
+
+        /// <summary>
+        /// Shows a list of all services available to customers
+        /// </summary>
+        /// <returns>List of services</returns>
         public ActionResult ViewAllServices()
         {
-            return View();
+            List<BikeService> services = context.BikeServices.ToList();
+            return View(services);
         }
 
 
