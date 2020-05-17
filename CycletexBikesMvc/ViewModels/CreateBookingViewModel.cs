@@ -11,10 +11,14 @@ namespace CycletexBikesMvc.ViewModels
     /// </summary>
     public class CreateBookingViewModel
     {
-        public CreateBookingViewModel()
-        {
-            PhoneNumber = "+44";
-        }
+        // Initially I used the constructor to send +44 to the PhoneNumber textarea in the view,
+        // however, I discovered that area codes are not necessary. Removing it allows me to set
+        // the exact length of numbers to 11, and removes some responsibility from the user.
+
+        //public CreateBookingViewModel()
+        //{
+        //    PhoneNumber = "+44";
+        //}
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
@@ -31,6 +35,7 @@ namespace CycletexBikesMvc.ViewModels
 
         public bool IsPaid { get; set; }
 
+        [Required]
         public string PhoneNumber { get; set; }
     }
 }

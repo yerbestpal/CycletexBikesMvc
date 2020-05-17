@@ -17,7 +17,7 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Bike Type")]
+        [Display(Name = "Bike Type"), Required]
         public string BikeType { get; set; }
 
         public string Brand { get; set; }

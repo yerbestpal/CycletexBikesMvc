@@ -16,10 +16,12 @@ namespace CycletexBikesMvc.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public bool IsSuccessful { get; set; }
 
-        [DataType(DataType.DateTime),
-         DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [Required]
+        [DataType(DataType.DateTime)] 
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime Date { get; set; }
 
         public decimal Total { get; set; }

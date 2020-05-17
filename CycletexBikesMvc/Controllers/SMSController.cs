@@ -3,6 +3,7 @@
 
 using System;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -36,20 +37,33 @@ namespace CycletexBikesMvc.Controllers
         [HttpGet]
         public void SendSms(string to, string body)
         {
-            // This is compromising data, but I cannot use environment variables since
-            // the solution is not hosted, so, please do not abuse it!
-            const string accountSid = "AC7cd74f215c1dfafabf10592d16f800e9";
-            const string authToken = "09cf306f3e69e2bdcd26d6aa575ce2a0";
+            try
+            {
+                if (to.IsEmpty())
+                {
+                    Console.WriteLine("No number entered. Will not send notification.");
+                    return;
+                }
 
-            TwilioClient.Init(accountSid, authToken);
+                // This is compromising data, but I cannot use environment variables since
+                // the solution is not hosted, so, please do not abuse it!
+                const string accountSid = "AC7cd74f215c1dfafabf10592d16f800e9";
+                const string authToken = "09cf306f3e69e2bdcd26d6aa575ce2a0";
 
-            var message = MessageResource.Create(
-                body: body,
-                from: new Twilio.Types.PhoneNumber("+447476552189"),
-                to: new Twilio.Types.PhoneNumber(to)
-            );
+                TwilioClient.Init(accountSid, authToken);
 
-            Console.WriteLine(message.Sid);
+                var message = MessageResource.Create(
+                    body: body,
+                    from: new Twilio.Types.PhoneNumber("+447476552189"),
+                    to: new Twilio.Types.PhoneNumber(to)
+                );
+
+                Console.WriteLine(message.Sid);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Twilio Error: " + ex.Message);
+            }
         }
     }
 }

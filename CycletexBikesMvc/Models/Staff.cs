@@ -13,18 +13,24 @@ namespace CycletexBikesMvc.Models
     /// </summary>
     public class Staff : ApplicationUser
     {
+        [Required]
         public string Address { get; set; }
+
+        [Required]
         public string PostCode { get; set; }
 
+        [Required]
         [Display(Name = "Date of Birth"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
+        [Required]
         [Display(Name = "Join Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime JoinDate { get; set; }
 
         [Display(Name = "End Date"), DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime? EndDate { get; set; }
 
+        [Required]
         public Decimal Salary { get; set; }
 
         // Navigational Properties.

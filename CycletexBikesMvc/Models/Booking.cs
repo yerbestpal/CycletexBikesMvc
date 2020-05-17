@@ -19,8 +19,10 @@ namespace CycletexBikesMvc.Models
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
+        [Required]
         public DateTime Date { get; set; }
 
+        [Required]
         public bool IsPaid { get; set; }
 
         [DataType(DataType.DateTime)]

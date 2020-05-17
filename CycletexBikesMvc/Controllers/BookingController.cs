@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace CycletexBikesMvc.Controllers
 {
@@ -271,13 +272,17 @@ namespace CycletexBikesMvc.Controllers
                     // the project submission and my evaluation.
                     if (NewBooking != null)
                     {
-                        SMSController SmsController = new SMSController();
-                        SmsController.SendSms(
-                            viewModel.PhoneNumber.ToString(),
-                            "Your " + bike.Brand.ToString() + " " +
-                            bike.Model.ToString() + " is booked in for the date " +
-                            NewBooking.Date
-                        );
+                        string phoneNumber = viewModel.PhoneNumber.ToString();
+                        if (!phoneNumber.IsEmpty() || phoneNumber != null)
+                        {
+                            SMSController SmsController = new SMSController();
+                            SmsController.SendSms(
+                                viewModel.PhoneNumber.ToString(),
+                                "Your " + bike.Brand.ToString() + " " +
+                                bike.Model.ToString() + " is booked in for the date " +
+                                NewBooking.Date
+                            );
+                        }
                     }
 
                     this.AddNotification("Successfully Booked", NotificationType.SUCCESS);

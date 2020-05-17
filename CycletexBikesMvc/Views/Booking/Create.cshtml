@@ -1,5 +1,5 @@
 ﻿<!--name: Ross McLean-->
-<!--date: 12/05/20-->
+<!--date: 17/05/20-->
 
 @model CycletexBikesMvc.ViewModels.CreateBookingViewModel
 @{ViewBag.Title = "Create Booking";}
@@ -46,10 +46,11 @@
 
                 @* HTML for Twilio outgoing number *@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PhoneNumber, "Input your phone number for booking confirmation", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.PhoneNumber, "phone number", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PhoneNumber, "Append Country code (+44 for UK numbers)", new { @class = "text-danger" })
+                        @* Limiting number length to exactly 11 *@
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @maxlength = "11", @minlength = "11" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "This field is required so we may notify you. Do NOT replace the first zero of your number with an area code - It will work without it", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -77,6 +78,7 @@
             showTodayButton: true,
             // Using FontAwesome glyphs because Bootstrap glyphs are not included in the Bootstrap NuGet package
             // Initially I was going to use the official CDN however it had an adverse effect on the greater UI
+            // by overriding all of the sites CSS and greatly decreasing the size of all elements
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
