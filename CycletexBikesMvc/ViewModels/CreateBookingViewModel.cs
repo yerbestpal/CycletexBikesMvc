@@ -40,7 +40,7 @@ namespace CycletexBikesMvc.ViewModels
         public bool IsPaid { get; set; }
 
         [Required]
-        [StringLength(11, ErrorMessage = "The {0} must be {2} characters long.", MinimumLength = 11)]
+        //[StringLength(11, ErrorMessage = "The {0} must be {2} characters long.", MinimumLength = 11)]
         public string PhoneNumber { get; set; }
     }
 }
